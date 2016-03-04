@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.AspNet.Mvc;
 
-namespace TheBuildesrMiddleAges.Game.Host.Controllers
+namespace TheBuildersMiddleAges.Game.Host.Controllers
 {
     public class GameController : Controller
     {

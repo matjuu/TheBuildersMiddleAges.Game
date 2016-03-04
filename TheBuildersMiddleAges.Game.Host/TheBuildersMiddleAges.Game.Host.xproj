@@ -6,8 +6,8 @@
   </PropertyGroup>
   <Import Project="$(VSToolsPath)\DNX\Microsoft.DNX.Props" Condition="'$(VSToolsPath)' != ''" />
   <PropertyGroup Label="Globals">
-    <ProjectGuid>a9105f2f-d83b-4af3-81a5-c00820746d04</ProjectGuid>
-    <RootNamespace>TheBuildesrMiddleAges.Game.Host</RootNamespace>
+    <ProjectGuid>2f17d640-be3e-41a4-b17c-b1f5e4488965</ProjectGuid>
+    <RootNamespace>TheBuildersMiddleAges.Game.Host</RootNamespace>
     <BaseIntermediateOutputPath Condition="'$(BaseIntermediateOutputPath)'=='' ">..\artifacts\obj\$(MSBuildProjectName)</BaseIntermediateOutputPath>
     <OutputPath Condition="'$(OutputPath)'=='' ">..\artifacts\bin\$(MSBuildProjectName)\</OutputPath>
   </PropertyGroup>
