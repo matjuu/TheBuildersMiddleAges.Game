@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.AspNet.Mvc;
+using TheBuildersMiddleAges.Game.Infrastructure;
 
 namespace TheBuildersMiddleAges.Game.Host.Controllers
 {
@@ -9,7 +10,8 @@ namespace TheBuildersMiddleAges.Game.Host.Controllers
         [Route("api/game/start")]
         public Guid StartGame()
         {
-            var roomGuid = Guid.NewGuid();
+            var roomGuid = GameContainer.CreateGame();
+
             return roomGuid;
         }
 
