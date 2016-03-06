@@ -10,7 +10,7 @@ namespace TheBuildersMiddleAges.Game.Host.Controllers
         [Route("api/game/start")]
         public Guid StartGame()
         {
-            var roomGuid = GameContainer.CreateGame();
+            var roomGuid = GameContainer.Instance.CreateGame();
 
             return roomGuid;
         }

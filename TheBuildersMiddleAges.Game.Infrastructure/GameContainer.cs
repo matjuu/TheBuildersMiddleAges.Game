@@ -5,11 +5,12 @@ namespace TheBuildersMiddleAges.Game.Infrastructure
 {
     // This project can output the Class library as a NuGet Package.
     // To enable this option, right-click on the project and select the Properties menu item. In the Build tab select "Produce outputs on build".
-    public static class GameContainer
+    public class GameContainer
     {
-        private static Dictionary<Guid, Core.Game> _games = new Dictionary<Guid, Core.Game>();
+        private Dictionary<Guid, Core.Game> _games = new Dictionary<Guid, Core.Game>();
+        public static GameContainer Instance { get; } = new GameContainer();
 
-        public static Guid CreateGame()
+        public Guid CreateGame()
         {
             var gameGuid = Guid.NewGuid();
 
@@ -18,7 +19,7 @@ namespace TheBuildersMiddleAges.Game.Infrastructure
             return gameGuid;
         }
 
-        public static void RemoveGame(Guid gameGuid)
+        public void RemoveGame(Guid gameGuid)
         {
             _games.Remove(gameGuid);
         }
