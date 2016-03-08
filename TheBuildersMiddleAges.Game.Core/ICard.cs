@@ -1,6 +1,6 @@
 ﻿namespace TheBuildersMiddleAges.Game.Core
 {
-    public class WorkersDeck : Deck
+    public interface ICard
     {
     }
 }

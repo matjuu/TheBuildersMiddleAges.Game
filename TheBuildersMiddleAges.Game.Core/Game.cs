@@ -7,8 +7,8 @@ namespace TheBuildersMiddleAges.Game.Core
     {
         private Dictionary<Guid, Player> _players;
         private GameBoard _gameBoard;
-        private Deck _workersDeck = new WorkersDeck();
-        private Deck _buildings = new BuildingsDeck();
+        private Deck<Worker> _workersDeck;
+        private Deck<Building> _buildingsDeck;
         private GameState _gameState;
     }
 }
