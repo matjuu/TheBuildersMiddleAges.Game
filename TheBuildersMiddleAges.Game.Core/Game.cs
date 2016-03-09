@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.ComTypes;
 
 namespace TheBuildersMiddleAges.Game.Core
 {
@@ -11,13 +12,15 @@ namespace TheBuildersMiddleAges.Game.Core
         private Deck<Building> _buildingsDeck;
         private GameState _gameState;
 
-        Game(Guid playerGuid)
+        public Game(){}
+
+        public Game(Guid playerGuid)
         {
             _players.Add(playerGuid, new Player());
 
             _workersDeck.Shuffle();
             _buildingsDeck.Shuffle();
-
+            
             PopulateGameboard();
         }
 
@@ -25,6 +28,21 @@ namespace TheBuildersMiddleAges.Game.Core
         {
             //TODO: A method which draws cards and puts them on the Game Board
             throw new NotImplementedException();
+        }
+
+        public void HireWorker(Guid playerGuid, int workerId)
+        {
+            if (_players.ContainsKey(playerGuid))
+            {
+                Player player;
+                _players.TryGetValue(playerGuid, out player);
+
+                var worker = _gameBoard.TakeWorker(workerId);
+
+                player.HireWorker(worker);
+            }
+
+            
         }
     }
 }
