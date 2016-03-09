@@ -1,7 +1,8 @@
 ﻿namespace TheBuildersMiddleAges.Game.Core
 {
-    internal class Building : ICard
+    public class Building : ICard
     {
-        public Reward Reward { get; set; }
+        public int Id { get; set; }
+        public Reward Reward { get; set; } = new Reward();
     }
 }

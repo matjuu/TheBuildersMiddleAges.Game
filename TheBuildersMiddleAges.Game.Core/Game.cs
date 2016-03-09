@@ -24,12 +24,6 @@ namespace TheBuildersMiddleAges.Game.Core
             PopulateGameboard();
         }
 
-        private void PopulateGameboard()
-        {
-            //TODO: A method which draws cards and puts them on the Game Board
-            throw new NotImplementedException();
-        }
-
         public void HireWorker(Guid playerGuid, int workerId)
         {
             if (_players.ContainsKey(playerGuid))
@@ -40,9 +34,30 @@ namespace TheBuildersMiddleAges.Game.Core
                 var worker = _gameBoard.TakeWorker(workerId);
 
                 player.HireWorker(worker);
-            }
 
-            
+                PopulateGameboard();
+            }
+        }
+
+        public void TakeBuilding(Guid playerGuid, int buildingId)
+        {
+            if (_players.ContainsKey(playerGuid))
+            {
+                Player player;
+                _players.TryGetValue(playerGuid, out player);
+
+                var building = _gameBoard.TakeBuilding(buildingId);
+
+                player.TakeBuilding(building);
+
+                PopulateGameboard();
+            }
+        }
+
+        private void PopulateGameboard()
+        {
+            //TODO: A method which draws cards and puts them on the Game Board
+            throw new NotImplementedException();
         }
     }
 }
