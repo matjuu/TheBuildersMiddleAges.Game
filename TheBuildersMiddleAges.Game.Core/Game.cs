@@ -54,6 +54,17 @@ namespace TheBuildersMiddleAges.Game.Core
             }
         }
 
+        public void AssignWorkerToBuilding(Guid playerGuid, int workerId, int buildingId)
+        {
+            if (_players.ContainsKey(playerGuid))
+            {
+                Player player;
+                _players.TryGetValue(playerGuid, out player);
+
+                player.AssignJob(workerId, buildingId);
+            }
+        }
+
         private void PopulateGameboard()
         {
             //TODO: A method which draws cards and puts them on the Game Board
