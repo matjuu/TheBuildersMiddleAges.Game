@@ -13,7 +13,6 @@ namespace TheBuildersMiddleAges.Game.Core
 
         public void Shuffle()
         {
-            throw new NotImplementedException();
         }
     }
 }

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNet.Mvc;
 using TheBuildersMiddleAges.Game.Infrastructure;
 
@@ -7,12 +9,19 @@ namespace TheBuildersMiddleAges.Game.Host.Controllers
     public class GameController : Controller
     {
         [HttpPost]
-        [Route("api/game/start")]
-        public Guid StartGame()
+        [Route("api/game/create")]
+        public dynamic CreateGameInstance()
         {
-            var roomGuid = GameContainer.Instance.CreateGame();
+            //TODO: This method should be called by the lobby service when multiplayer is implemented
+            IEnumerable<Guid> players = new List<Guid> {Guid.NewGuid()};
 
-            return roomGuid;
+            var roomGuid = GameContainer.Instance.CreateGame(players);
+
+            return new
+            {
+                roomGuid,
+                playerGuid = players.First()
+            };
         }
 
         [HttpPost]
