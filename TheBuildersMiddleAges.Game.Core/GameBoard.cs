@@ -9,6 +9,16 @@ namespace TheBuildersMiddleAges.Game.Core
         private List<Worker> _workers = new List<Worker>();
         private List<Building> _buildings = new List<Building>();
 
+        public void Add(Worker worker)
+        {
+            _workers.Add(worker);
+        }
+
+        public void Add(Building building)
+        {
+            _buildings.Add(building);
+        }
+
         public Worker TakeWorker(int workerId)
         {
             var worker =_workers.First(wrkr => wrkr.Id == workerId);

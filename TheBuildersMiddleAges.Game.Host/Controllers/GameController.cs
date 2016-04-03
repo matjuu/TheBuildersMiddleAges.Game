@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNet.Mvc;
+using TheBuildersMiddleAges.Game.Host.Contracts;
 using TheBuildersMiddleAges.Game.Infrastructure;
 
 namespace TheBuildersMiddleAges.Game.Host.Controllers
@@ -26,7 +27,7 @@ namespace TheBuildersMiddleAges.Game.Host.Controllers
 
         [HttpPost]
         [Route("api/game/state")]
-        public dynamic GetGameState()
+        public dynamic GetGameState(BasicRequest request)
         {
             return new
             {
@@ -43,23 +44,35 @@ namespace TheBuildersMiddleAges.Game.Host.Controllers
 
         [HttpPost]
         [Route("api/worker/take")]
-        public string TakeWorker()
+        public string TakeWorker(TakeCardRequest request)
         {
-            return "Worker has been successfully taken.";
+            var gameInstance = GameContainer.Instance.GetGame(request.GameGuid);
+
+            if (request.PlayerGuid != null) gameInstance.TakeWorker(request.PlayerGuid.Value, request.cardId);
+
+            return "Worker has been successfully taken";
         }
 
         [HttpPost]
         [Route("api/building/take")]
-        public string TakeBuilding()
+        public string TakeBuilding(TakeCardRequest request)
         {
+            var gameInstance = GameContainer.Instance.GetGame(request.GameGuid);
+
+            if (request.PlayerGuid != null) gameInstance.TakeBuilding(request.PlayerGuid.Value, request.cardId);
+
             return "Building has been successfully taken";
 
         }
 
         [HttpPost]
         [Route("api/worker/assign")]
-        public string AssignWorker()
+        public string AssignWorker(AssignWorkerRequest request)
         {
+            var gameInstance = GameContainer.Instance.GetGame(request.GameGuid);
+
+            if (request.PlayerGuid != null) gameInstance.AssignWorkerToBuilding(request.PlayerGuid.Value, request.workerId, request.buildingId);
+
             return "Worker has been successfully assigned.";
         }
     }

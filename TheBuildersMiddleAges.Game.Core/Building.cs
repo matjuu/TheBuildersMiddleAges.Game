@@ -7,10 +7,15 @@ namespace TheBuildersMiddleAges.Game.Core
         private List<Worker> _assignedWorkers = new List<Worker>();
 
         public int Id { get; set; }
-        public Reward Reward { get; set; } = new Reward();
         public Resources Requirements { get; set; }
+        public Reward Reward { get; set; }
         public BuildingState State => DetermineState();
 
+        public Building(int Id,Resources requirements, Reward reward)
+        {
+            Reward = reward;
+            Requirements = requirements;
+        }
 
         public void AssignWorker(Worker worker)
         {
@@ -19,21 +24,15 @@ namespace TheBuildersMiddleAges.Game.Core
 
         private BuildingState DetermineState()
         {
-            if (_assignedWorkers.Count > 0)
-            {
-                var completedWork = new Resources();
-                foreach (var worker in _assignedWorkers)
-                {
-                    completedWork.Add(worker.ProducedResources);
-                }
+            if (_assignedWorkers.Count <= 0) return BuildingState.Idle;
 
-                return IsBuildingComplete(completedWork) ? BuildingState.Completed : BuildingState.InProgress;
-
-            }
-            else
+            var completedWork = new Resources(0,0,0,0);
+            foreach (var worker in _assignedWorkers)
             {
-                return BuildingState.Idle;
+                completedWork.Add(worker.ProducedResources);
             }
+
+            return IsBuildingComplete(completedWork) ? BuildingState.Completed : BuildingState.InProgress;
         }
 
         private bool IsBuildingComplete(Resources completedWork)

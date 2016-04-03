@@ -4,5 +4,11 @@
     {
         public int Id { get; set; }
         public Resources ProducedResources { get; set; }
+
+        public Worker(int id, Resources producedResources)
+        {
+            Id = id;
+            ProducedResources = producedResources;
+        }
     }
 }

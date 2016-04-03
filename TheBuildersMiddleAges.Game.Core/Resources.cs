@@ -10,6 +10,14 @@ namespace TheBuildersMiddleAges.Game.Core
         public int Knowledge { get; set; }
         public int Tile { get; set; }
 
+        public Resources(int stone, int wood, int knowledge, int tile)
+        {
+            Stone = stone;
+            Wood = wood;
+            Knowledge = knowledge;
+            Tile = tile;
+        }
+
         public void Add(Resources resources)
         {
             Stone += resources.Stone;

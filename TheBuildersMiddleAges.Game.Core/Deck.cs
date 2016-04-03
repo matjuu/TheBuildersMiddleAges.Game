@@ -3,16 +3,26 @@ using System.Collections.Generic;
 
 namespace TheBuildersMiddleAges.Game.Core
 {
-    public class Deck<T> where T : ICard { 
-        public Deck(List<T> deck)
+    public class Deck<T> where T : ICard
+    {
+        private readonly Queue<T> _cards;
+
+        public Deck(IEnumerable<T> cards)
         {
-            _deck = deck;
+            _cards = new Queue<T>(cards);
+            Shuffle();
         }
 
-        private List<T> _deck;
-
-        public void Shuffle()
+        public T Draw()
         {
+            var card = _cards.Dequeue();
+
+            return card;
+        }
+
+        private void Shuffle()
+        {
+            //TODO: Implement card shuffling
         }
     }
 }

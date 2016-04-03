@@ -7,8 +7,8 @@ namespace TheBuildersMiddleAges.Game.Core
     {
         private Dictionary<Guid, Player> _players = new Dictionary<Guid, Player>();
         private GameBoard _gameBoard = new GameBoard();
-        private Deck<Worker> _workersDeck = new Deck<Worker>(new List<Worker>());
-        private Deck<Building> _buildingsDeck = new Deck<Building>(new List<Building>());
+        private Deck<Worker> _workersDeck = DeckFactory.WorkerDeck();
+        private Deck<Building> _buildingsDeck = DeckFactory.BuildingDeck();
         private GameState _gameState;
 
         public Game(){}
@@ -19,14 +19,11 @@ namespace TheBuildersMiddleAges.Game.Core
             {
                 _players.Add(playerGuid, new Player());
             }
-
-            _workersDeck.Shuffle();
-            _buildingsDeck.Shuffle();
             
-            PopulateGameboard();
+            InitializeGameboard();
         }
 
-        public void HireWorker(Guid playerGuid, int workerId)
+        public void TakeWorker(Guid playerGuid, int workerId)
         {
             if (_players.ContainsKey(playerGuid))
             {
@@ -37,7 +34,7 @@ namespace TheBuildersMiddleAges.Game.Core
 
                 player.HireWorker(worker);
 
-                PopulateGameboard();
+                _gameBoard.Add(_workersDeck.Draw());
             }
         }
 
@@ -52,7 +49,7 @@ namespace TheBuildersMiddleAges.Game.Core
 
                 player.TakeBuilding(building);
 
-                PopulateGameboard();
+                _gameBoard.Add(_buildingsDeck.Draw());
             }
         }
 
@@ -67,8 +64,13 @@ namespace TheBuildersMiddleAges.Game.Core
             }
         }
 
-        private void PopulateGameboard()
+        private void InitializeGameboard()
         {
+            for (var i = 0; i < 5; i++)
+            {
+                _gameBoard.Add(_workersDeck.Draw());
+                _gameBoard.Add(_buildingsDeck.Draw());
+            }
         }
     }
 }
