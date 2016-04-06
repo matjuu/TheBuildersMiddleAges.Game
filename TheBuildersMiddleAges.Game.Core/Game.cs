@@ -4,6 +4,7 @@ using System.Linq;
 
 namespace TheBuildersMiddleAges.Game.Core
 {
+    //TODO: Consider refactoring to implement Command pattern to easily segregate move logic from validation (?)
     public class Game
     {
         public Dictionary<Guid, Player> Players { get; private set; } = new Dictionary<Guid, Player>();
@@ -29,49 +30,45 @@ namespace TheBuildersMiddleAges.Game.Core
 
         public void TakeWorker(Guid playerGuid, int workerId)
         {
-            if (Players.ContainsKey(playerGuid) && _gameClock.getActingPlayerGuid() == playerGuid)
-            {
-                Player player;
-                Players.TryGetValue(playerGuid, out player);
+            if (Players.ContainsKey(playerGuid) == false) throw new Exception("Unauthorized");
+            if (_gameClock.getActingPlayerGuid() != playerGuid) throw new Exception("Not the player's turn yet");
 
-                var worker = GameBoard.TakeWorker(workerId);
+            Player player;
+            Players.TryGetValue(playerGuid, out player);
 
-                player.HireWorker(worker);
+            var worker = GameBoard.TakeWorker(workerId);
 
-                GameBoard.Add(_workersDeck.Draw());               
-            }
+            player.HireWorker(worker);
 
-            DetermineGameState();
+            GameBoard.Add(_workersDeck.Draw());
+
+            CheckIfGameOver();
         }
 
         public void TakeBuilding(Guid playerGuid, int buildingId)
         {
-            if (Players.ContainsKey(playerGuid))
-            {
-                Player player;
-                Players.TryGetValue(playerGuid, out player);
+            if (Players.ContainsKey(playerGuid) == false) throw new Exception("Unauthorized");
+            if (_gameClock.getActingPlayerGuid() != playerGuid) throw new Exception("Not the player's turn yet");
 
-                var building = GameBoard.TakeBuilding(buildingId);
-
-                player.TakeBuilding(building);
-
-                GameBoard.Add(_buildingsDeck.Draw());
-            }
-
-            DetermineGameState();
+            Player player;
+            Players.TryGetValue(playerGuid, out player);
+     
+            var building = GameBoard.TakeBuilding(buildingId);
+            player.TakeBuilding(building);
+            GameBoard.Add(_buildingsDeck.Draw());
+            CheckIfGameOver();
         }
 
         public void AssignWorkerToBuilding(Guid playerGuid, int workerId, int buildingId)
         {
-            if (Players.ContainsKey(playerGuid))
-            {
-                Player player;
-                Players.TryGetValue(playerGuid, out player);
+            if (Players.ContainsKey(playerGuid) == false) throw new Exception("Unauthorized");
+            if (_gameClock.getActingPlayerGuid() != playerGuid) throw new Exception("Not the player's turn yet");
 
-                player.AssignWorkerToBuilding(workerId, buildingId);
-            }
+            Player player;
+            Players.TryGetValue(playerGuid, out player);
+            player.AssignWorkerToBuilding(workerId, buildingId);
 
-            DetermineGameState();
+            CheckIfGameOver();
         }
 
         private void InitializeGameboard()
@@ -83,9 +80,8 @@ namespace TheBuildersMiddleAges.Game.Core
             }
         }
 
-        private void DetermineGameState()
+        private void CheckIfGameOver()
         {
-            State = GameState.InProgress;
             if (Players.Any(x => x.Value.VictoryPoints >= 17))
             {
                 State = GameState.Over;
