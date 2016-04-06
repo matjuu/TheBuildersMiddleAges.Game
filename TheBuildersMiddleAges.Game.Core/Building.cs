@@ -4,30 +4,31 @@ namespace TheBuildersMiddleAges.Game.Core
 {
     public class Building : ICard
     {
-        private List<Worker> _assignedWorkers = new List<Worker>();
+        public List<Worker> AssignedWorkers { get; set; } = new List<Worker>();
 
         public int Id { get; set; }
         public Resources Requirements { get; set; }
         public Reward Reward { get; set; }
         public BuildingState State => DetermineState();
 
-        public Building(int Id,Resources requirements, Reward reward)
+        public Building(int id,Resources requirements, Reward reward)
         {
+            Id = id;
             Reward = reward;
             Requirements = requirements;
         }
 
         public void AssignWorker(Worker worker)
         {
-            _assignedWorkers.Add(worker);
+            AssignedWorkers.Add(worker);
         }
 
         private BuildingState DetermineState()
         {
-            if (_assignedWorkers.Count <= 0) return BuildingState.Idle;
+            if (AssignedWorkers.Count <= 0) return BuildingState.Idle;
 
             var completedWork = new Resources(0,0,0,0);
-            foreach (var worker in _assignedWorkers)
+            foreach (var worker in AssignedWorkers)
             {
                 completedWork.Add(worker.ProducedResources);
             }
