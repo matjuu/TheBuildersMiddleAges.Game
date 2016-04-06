@@ -5,11 +5,11 @@ namespace TheBuildersMiddleAges.Game.Core
 {
     public class Game
     {
-        private Dictionary<Guid, Player> _players = new Dictionary<Guid, Player>();
-        private GameBoard _gameBoard = new GameBoard();
+        public Dictionary<Guid, Player> Players { get; private set; } = new Dictionary<Guid, Player>();
+        public GameBoard GameBoard { get; private set; } = new GameBoard();
         private Deck<Worker> _workersDeck = DeckFactory.WorkerDeck();
         private Deck<Building> _buildingsDeck = DeckFactory.BuildingDeck();
-        private GameState _gameState;
+        public GameState State { get; private set; }
 
         public Game(){}
 
@@ -17,7 +17,7 @@ namespace TheBuildersMiddleAges.Game.Core
         {
             foreach (var playerGuid in playerGuids)
             {
-                _players.Add(playerGuid, new Player());
+                Players.Add(playerGuid, new Player());
             }
             
             InitializeGameboard();
@@ -25,42 +25,42 @@ namespace TheBuildersMiddleAges.Game.Core
 
         public void TakeWorker(Guid playerGuid, int workerId)
         {
-            if (_players.ContainsKey(playerGuid))
+            if (Players.ContainsKey(playerGuid))
             {
                 Player player;
-                _players.TryGetValue(playerGuid, out player);
+                Players.TryGetValue(playerGuid, out player);
 
-                var worker = _gameBoard.TakeWorker(workerId);
+                var worker = GameBoard.TakeWorker(workerId);
 
                 player.HireWorker(worker);
 
-                _gameBoard.Add(_workersDeck.Draw());
+                GameBoard.Add(_workersDeck.Draw());
             }
         }
 
         public void TakeBuilding(Guid playerGuid, int buildingId)
         {
-            if (_players.ContainsKey(playerGuid))
+            if (Players.ContainsKey(playerGuid))
             {
                 Player player;
-                _players.TryGetValue(playerGuid, out player);
+                Players.TryGetValue(playerGuid, out player);
 
-                var building = _gameBoard.TakeBuilding(buildingId);
+                var building = GameBoard.TakeBuilding(buildingId);
 
                 player.TakeBuilding(building);
 
-                _gameBoard.Add(_buildingsDeck.Draw());
+                GameBoard.Add(_buildingsDeck.Draw());
             }
         }
 
         public void AssignWorkerToBuilding(Guid playerGuid, int workerId, int buildingId)
         {
-            if (_players.ContainsKey(playerGuid))
+            if (Players.ContainsKey(playerGuid))
             {
                 Player player;
-                _players.TryGetValue(playerGuid, out player);
+                Players.TryGetValue(playerGuid, out player);
 
-                player.AssignJob(workerId, buildingId);
+                player.AssignWorkerToBuilding(workerId, buildingId);
             }
         }
 
@@ -68,8 +68,8 @@ namespace TheBuildersMiddleAges.Game.Core
         {
             for (var i = 0; i < 5; i++)
             {
-                _gameBoard.Add(_workersDeck.Draw());
-                _gameBoard.Add(_buildingsDeck.Draw());
+                GameBoard.Add(_workersDeck.Draw());
+                GameBoard.Add(_buildingsDeck.Draw());
             }
         }
     }

@@ -16,35 +16,25 @@ namespace TheBuildersMiddleAges.Game.Host.Controllers
             //TODO: This method should be called by the lobby service when multiplayer is implemented
             IEnumerable<Guid> players = new List<Guid> {Guid.NewGuid()};
 
-            var roomGuid = GameContainer.Instance.CreateGame(players);
+            var gameGuid = GameContainer.Instance.CreateGame(players);
 
             return new
             {
-                roomGuid,
+                gameGuid,
                 playerGuid = players.First()
             };
         }
 
         [HttpPost]
         [Route("api/game/state")]
-        public dynamic GetGameState(BasicRequest request)
+        public Core.Game GetGameState([FromBody] BasicRequest request)
         {
-            return new
-            {
-                Board = "Dummy board object",
-                Players = new dynamic[]
-                {
-                    new
-                    {
-                        Guid = Guid.NewGuid()
-                    }
-                }     
-            };
+            return GameContainer.Instance.GetGame(request.GameGuid);
         }
 
         [HttpPost]
-        [Route("api/worker/take")]
-        public string TakeWorker(TakeCardRequest request)
+        [Route("api/game/worker/take")]
+        public string TakeWorker([FromBody] TakeCardRequest request)
         {
             var gameInstance = GameContainer.Instance.GetGame(request.GameGuid);
 
@@ -54,8 +44,8 @@ namespace TheBuildersMiddleAges.Game.Host.Controllers
         }
 
         [HttpPost]
-        [Route("api/building/take")]
-        public string TakeBuilding(TakeCardRequest request)
+        [Route("api/game/building/take")]
+        public string TakeBuilding([FromBody] TakeCardRequest request)
         {
             var gameInstance = GameContainer.Instance.GetGame(request.GameGuid);
 
@@ -66,8 +56,8 @@ namespace TheBuildersMiddleAges.Game.Host.Controllers
         }
 
         [HttpPost]
-        [Route("api/worker/assign")]
-        public string AssignWorker(AssignWorkerRequest request)
+        [Route("api/game/worker/assign")]
+        public string AssignWorker([FromBody] AssignWorkerRequest request)
         {
             var gameInstance = GameContainer.Instance.GetGame(request.GameGuid);
 
