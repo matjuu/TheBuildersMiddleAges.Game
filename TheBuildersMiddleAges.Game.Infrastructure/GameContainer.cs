@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using TheBuildersMiddleAges.Game.Core;
 
 namespace TheBuildersMiddleAges.Game.Infrastructure
 {
@@ -31,6 +33,18 @@ namespace TheBuildersMiddleAges.Game.Infrastructure
             _games.TryGetValue(gameGuid, out gameInstance);
 
             return gameInstance;
+        }
+
+        //TODO: Run this in a separate thread every few minutes to clean up game container (also potentially move this elsewhere)
+        public void RemoveFinishedGames()
+        {
+            foreach (var game in _games)
+            {
+                if (game.Value.State == GameState.Over)
+                {
+                    _games.Remove(game.Key);
+                }
+            }
         }
     }
 }
