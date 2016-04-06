@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace TheBuildersMiddleAges.Game.Core
 {
@@ -7,14 +8,16 @@ namespace TheBuildersMiddleAges.Game.Core
     {
         public Dictionary<Guid, Player> Players { get; private set; } = new Dictionary<Guid, Player>();
         public GameBoard GameBoard { get; private set; } = new GameBoard();
-        private Deck<Worker> _workersDeck = DeckFactory.WorkerDeck();
-        private Deck<Building> _buildingsDeck = DeckFactory.BuildingDeck();
         public GameState State { get; private set; }
 
-        public Game(){}
+        private Deck<Worker> _workersDeck = DeckFactory.WorkerDeck();
+        private Deck<Building> _buildingsDeck = DeckFactory.BuildingDeck();
+        private GameClock _gameClock;
 
         public Game(IEnumerable<Guid> playerGuids)
         {
+            _gameClock = new GameClock(playerGuids.ToArray());
+
             foreach (var playerGuid in playerGuids)
             {
                 Players.Add(playerGuid, new Player());
@@ -25,7 +28,7 @@ namespace TheBuildersMiddleAges.Game.Core
 
         public void TakeWorker(Guid playerGuid, int workerId)
         {
-            if (Players.ContainsKey(playerGuid))
+            if (Players.ContainsKey(playerGuid) && _gameClock.getActingPlayerGuid() == playerGuid)
             {
                 Player player;
                 Players.TryGetValue(playerGuid, out player);
@@ -34,7 +37,7 @@ namespace TheBuildersMiddleAges.Game.Core
 
                 player.HireWorker(worker);
 
-                GameBoard.Add(_workersDeck.Draw());
+                GameBoard.Add(_workersDeck.Draw());               
             }
         }
 
