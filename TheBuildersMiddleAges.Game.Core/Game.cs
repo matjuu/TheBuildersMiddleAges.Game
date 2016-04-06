@@ -14,6 +14,7 @@ namespace TheBuildersMiddleAges.Game.Core
         private Deck<Building> _buildingsDeck = DeckFactory.BuildingDeck();
         private GameClock _gameClock;
 
+
         public Game(IEnumerable<Guid> playerGuids)
         {
             _gameClock = new GameClock(playerGuids.ToArray());
@@ -39,6 +40,8 @@ namespace TheBuildersMiddleAges.Game.Core
 
                 GameBoard.Add(_workersDeck.Draw());               
             }
+
+            DetermineGameState();
         }
 
         public void TakeBuilding(Guid playerGuid, int buildingId)
@@ -54,6 +57,8 @@ namespace TheBuildersMiddleAges.Game.Core
 
                 GameBoard.Add(_buildingsDeck.Draw());
             }
+
+            DetermineGameState();
         }
 
         public void AssignWorkerToBuilding(Guid playerGuid, int workerId, int buildingId)
@@ -65,6 +70,8 @@ namespace TheBuildersMiddleAges.Game.Core
 
                 player.AssignWorkerToBuilding(workerId, buildingId);
             }
+
+            DetermineGameState();
         }
 
         private void InitializeGameboard()
@@ -73,6 +80,15 @@ namespace TheBuildersMiddleAges.Game.Core
             {
                 GameBoard.Add(_workersDeck.Draw());
                 GameBoard.Add(_buildingsDeck.Draw());
+            }
+        }
+
+        private void DetermineGameState()
+        {
+            State = GameState.InProgress;
+            if (Players.Any(x => x.Value.VictoryPoints >= 17))
+            {
+                State = GameState.Over;
             }
         }
     }
