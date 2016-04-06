@@ -6,9 +6,9 @@ namespace TheBuildersMiddleAges.Game.Core
     {
         public List<Worker> AssignedWorkers { get; set; } = new List<Worker>();
 
-        public int Id { get; set; }
-        public Resources Requirements { get; set; }
-        public Reward Reward { get; set; }
+        public int Id { get; private set; }
+        public Resources Requirements { get; private set; }
+        public Reward Reward { get; private set; }
         public BuildingState State => DetermineState();
 
         public Building(int id,Resources requirements, Reward reward)
