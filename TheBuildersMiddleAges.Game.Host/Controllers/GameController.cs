@@ -14,7 +14,7 @@ namespace TheBuildersMiddleAges.Game.Host.Controllers
         public dynamic CreateGameInstance()
         {
             //TODO: This method should be called by the lobby service when multiplayer is implemented
-            IEnumerable<Guid> players = new List<Guid> {Guid.NewGuid()};
+            List<Guid> players = new List<Guid> {Guid.NewGuid()};
 
             var gameGuid = GameContainer.Instance.CreateGame(players);
 

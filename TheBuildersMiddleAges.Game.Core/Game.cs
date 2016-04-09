@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using TheBuildersMiddleAges.Game.Core.Deck;
 
 namespace TheBuildersMiddleAges.Game.Core
 {
@@ -32,7 +31,7 @@ namespace TheBuildersMiddleAges.Game.Core
         public void TakeWorker(Guid playerGuid, int workerId)
         {
             if (Players.ContainsKey(playerGuid) == false) throw new Exception("Unauthorized");
-            if (_gameClock.getActingPlayerGuid() != playerGuid) throw new Exception("Not the player's turn yet");
+            if (_gameClock.GetActingPlayerGuid() != playerGuid) throw new Exception("Not the player's turn yet");
 
             Player player;
             Players.TryGetValue(playerGuid, out player);

@@ -10,7 +10,7 @@ namespace TheBuildersMiddleAges.Game.Infrastructure
         private Dictionary<Guid, Core.Game> _games = new Dictionary<Guid, Core.Game>();
         public static GameContainer Instance { get; } = new GameContainer();
 
-        public Guid CreateGame(IEnumerable<Guid> players)
+        public Guid CreateGame(List<Guid> players)
         {
             var gameGuid = Guid.NewGuid();
 
