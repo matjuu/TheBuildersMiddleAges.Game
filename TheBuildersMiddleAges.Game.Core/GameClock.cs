@@ -1,23 +1,23 @@
 using System;
+using System.Collections.Generic;
 
 namespace TheBuildersMiddleAges.Game.Core
 {
     public class GameClock
     {
-        private Guid[] _players;
+        private readonly List<Guid> _players;
         private int _moveNumber = 1;
 
-        public bool ShouldCheckForWin => _moveNumber%_players.Length == 1;
+        public bool ShouldCheckForWin => _moveNumber % _players.Count == 1;
 
-        public GameClock(Guid[] players)
+        public GameClock(List<Guid> players)
         {
             _players = players;
         }
 
-        public Guid getActingPlayerGuid()
+        public Guid GetActingPlayerGuid()
         {
-            int actingPlayerIndex = (_moveNumber - 1)%_players.Length;
-            return _players[actingPlayerIndex];
+            return _players[_moveNumber % _players.Count];
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using TheBuildersMiddleAges.Game.Core.Deck;
 
 namespace TheBuildersMiddleAges.Game.Core
 {
@@ -16,9 +17,9 @@ namespace TheBuildersMiddleAges.Game.Core
         private GameClock _gameClock;
 
 
-        public Game(IEnumerable<Guid> playerGuids)
+        public Game(List<Guid> playerGuids)
         {
-            _gameClock = new GameClock(playerGuids.ToArray());
+            _gameClock = new GameClock(playerGuids);
 
             foreach (var playerGuid in playerGuids)
             {
@@ -48,7 +49,7 @@ namespace TheBuildersMiddleAges.Game.Core
         public void TakeBuilding(Guid playerGuid, int buildingId)
         {
             if (Players.ContainsKey(playerGuid) == false) throw new Exception("Unauthorized");
-            if (_gameClock.getActingPlayerGuid() != playerGuid) throw new Exception("Not the player's turn yet");
+            if (_gameClock.GetActingPlayerGuid() != playerGuid) throw new Exception("Not the player's turn yet");
 
             Player player;
             Players.TryGetValue(playerGuid, out player);
@@ -62,7 +63,7 @@ namespace TheBuildersMiddleAges.Game.Core
         public void AssignWorkerToBuilding(Guid playerGuid, int workerId, int buildingId)
         {
             if (Players.ContainsKey(playerGuid) == false) throw new Exception("Unauthorized");
-            if (_gameClock.getActingPlayerGuid() != playerGuid) throw new Exception("Not the player's turn yet");
+            if (_gameClock.GetActingPlayerGuid() != playerGuid) throw new Exception("Not the player's turn yet");
 
             Player player;
             Players.TryGetValue(playerGuid, out player);
