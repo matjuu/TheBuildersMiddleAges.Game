@@ -19,7 +19,7 @@ namespace TheBuildersMiddleAges.Game.Core
 
         public void TakeBuilding(Building building)
         {
-            //TODO: Add Building costs
+            //TODO: AddWorker Building costs
             Buildings.Add(building);
         }
 
@@ -30,7 +30,7 @@ namespace TheBuildersMiddleAges.Game.Core
 
             if(worker == null) throw new Exception("No worker with specified ID was found.");
             if(building == null) throw new Exception("No building with specified ID was found.");
-            //TODO: Add worker costs
+            //TODO: AddWorker worker costs
 
             building.AssignWorker(worker);
             worker.State = WorkerState.Working;

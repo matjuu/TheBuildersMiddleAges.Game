@@ -10,15 +10,15 @@ namespace TheBuildersMiddleAges.Game.Core
         public Dictionary<Guid, Player> Players { get; private set; } = new Dictionary<Guid, Player>();
         public GameBoard GameBoard { get; private set; } = new GameBoard();
         public GameState State { get; private set; }
+        public readonly GameClock GameClock;
 
         private Deck<Worker> _workersDeck = DeckFactory.WorkerDeck();
         private Deck<Building> _buildingsDeck = DeckFactory.BuildingDeck();
-        private GameClock _gameClock;
 
 
         public Game(List<Guid> playerGuids)
         {
-            _gameClock = new GameClock(playerGuids);
+            GameClock = new GameClock(playerGuids);
 
             foreach (var playerGuid in playerGuids)
             {
@@ -28,41 +28,37 @@ namespace TheBuildersMiddleAges.Game.Core
             InitializeGameboard();
         }
 
-        public void TakeWorker(Guid playerGuid, int workerId)
+        public Worker TakeWorker(int workerId)
         {
-            if (Players.ContainsKey(playerGuid) == false) throw new Exception("Unauthorized");
-            if (_gameClock.GetActingPlayerGuid() != playerGuid) throw new Exception("Not the player's turn yet");
+            return GameBoard.TakeWorker(workerId);
+        }
 
-            Player player;
-            Players.TryGetValue(playerGuid, out player);
+        public int DrawWorker()
+        {
+            Worker newCard = _workersDeck.Draw();
+            GameBoard.AddWorker(newCard);
 
-            var worker = GameBoard.TakeWorker(workerId);
-
-            player.HireWorker(worker);
-
-            GameBoard.Add(_workersDeck.Draw());
-
-            CheckIfGameOver();
+            return newCard.Id;
         }
 
         public void TakeBuilding(Guid playerGuid, int buildingId)
         {
             if (Players.ContainsKey(playerGuid) == false) throw new Exception("Unauthorized");
-            if (_gameClock.GetActingPlayerGuid() != playerGuid) throw new Exception("Not the player's turn yet");
+            if (GameClock.GetActingPlayerGuid() != playerGuid) throw new Exception("Not the player's turn yet");
 
             Player player;
             Players.TryGetValue(playerGuid, out player);
      
             var building = GameBoard.TakeBuilding(buildingId);
             player.TakeBuilding(building);
-            GameBoard.Add(_buildingsDeck.Draw());
+            GameBoard.AddBuilding(_buildingsDeck.Draw());
             CheckIfGameOver();
         }
 
         public void AssignWorkerToBuilding(Guid playerGuid, int workerId, int buildingId)
         {
             if (Players.ContainsKey(playerGuid) == false) throw new Exception("Unauthorized");
-            if (_gameClock.GetActingPlayerGuid() != playerGuid) throw new Exception("Not the player's turn yet");
+            if (GameClock.GetActingPlayerGuid() != playerGuid) throw new Exception("Not the player's turn yet");
 
             Player player;
             Players.TryGetValue(playerGuid, out player);
@@ -75,8 +71,8 @@ namespace TheBuildersMiddleAges.Game.Core
         {
             for (var i = 0; i < 5; i++)
             {
-                GameBoard.Add(_workersDeck.Draw());
-                GameBoard.Add(_buildingsDeck.Draw());
+                GameBoard.AddWorker(_workersDeck.Draw());
+                GameBoard.AddBuilding(_buildingsDeck.Draw());
             }
         }
 

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNet.Mvc;
+using TheBuildersMiddleAges.Game.Actions;
+using TheBuildersMiddleAges.Game.Actions.Actions;
 using TheBuildersMiddleAges.Game.Host.Contracts;
 using TheBuildersMiddleAges.Game.Infrastructure;
 
@@ -9,6 +11,8 @@ namespace TheBuildersMiddleAges.Game.Host.Controllers
 {
     public class GameController : Controller
     {
+        private readonly ActionHandler _handler = new ActionHandler();
+
         [HttpPost]
         [Route("api/game/create")]
         public dynamic CreateGameInstance()
@@ -35,13 +39,11 @@ namespace TheBuildersMiddleAges.Game.Host.Controllers
 
         [HttpPost]
         [Route("api/game/worker/take")]
-        public string TakeWorker([FromBody] TakeCardRequest request)
+        public ActionResponse TakeWorker([FromBody] ActionRequest request)
         {
-            var gameInstance = GameContainer.Instance.GetGame(request.GameGuid);
-
-            if (request.PlayerGuid != null) gameInstance.TakeWorker(request.PlayerGuid.Value, request.cardId);
-
-            return "Worker has been successfully taken";
+            ActionResponse response = _handler.HandleAction(request, new TakeWorkerCardAction(GameContainer.Instance.GetGame(request.GameGuid)));
+            
+            return response;
         }
 
         [HttpPost]

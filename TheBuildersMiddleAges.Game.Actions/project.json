@@ -1,7 +1,7 @@
 {
   "version": "1.0.0-*",
-  "description": "TheBuildersMiddleAges.Game.Core Class Library",
-  "authors": [ "Matas" ],
+  "description": "TheBuildersMiddleAges.Game.Actions Class Library",
+  "authors": [ "Martynas" ],
   "tags": [ "" ],
   "projectUrl": "",
   "licenseUrl": "",
@@ -18,5 +18,6 @@
     }
   },
   "dependencies": {
+    "TheBuildersMiddleAges.Game.Core": "1.0.0-*"
   }
 }

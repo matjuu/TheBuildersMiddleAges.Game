@@ -6,22 +6,22 @@ namespace TheBuildersMiddleAges.Game.Core
 {
     public class GameBoard
     {
-        public List<Worker> Workers { get; private set; } = new List<Worker>();
-        public List<Building> Buildings { get; private set; } = new List<Building>();
+        private List<Worker> Workers { get; set; } = new List<Worker>();
+        private List<Building> Buildings { get; set; } = new List<Building>();
 
-        public void Add(Worker worker)
+        public void AddWorker(Worker worker)
         {
             Workers.Add(worker);
         }
 
-        public void Add(Building building)
+        public void AddBuilding(Building building)
         {
             Buildings.Add(building);
         }
 
         public Worker TakeWorker(int workerId)
         {
-            var worker =Workers.First(wrkr => wrkr.Id == workerId);
+            var worker = Workers.First(wrkr => wrkr.Id == workerId);
 
             if (worker == null)
             {
