@@ -28,12 +28,7 @@ namespace TheBuildersMiddleAges.Game.Infrastructure
 
         public Core.Game GetGame(Guid gameGuid)
         {
-            if(_games.ContainsKey(gameGuid) == false) throw new Exception("No such game exists.");
-
-            Core.Game gameInstance;
-            _games.TryGetValue(gameGuid, out gameInstance);
-
-            return gameInstance;
+            return _games[gameGuid];
         }
 
         public bool TryGetGame(ActionRequest request, out Core.Game gameInstance)

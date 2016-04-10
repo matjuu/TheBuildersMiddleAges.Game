@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.AspNet.Http;
 using Microsoft.AspNet.Mvc;
 using TheBuildersMiddleAges.Game.Actions;
 using TheBuildersMiddleAges.Game.Actions.Actions;
@@ -13,7 +12,6 @@ namespace TheBuildersMiddleAges.Game.Host.Controllers
     public class GameController : Controller
     {
         private readonly ActionHandler _handler = new ActionHandler();
-        private Core.Game _game;
 
         [HttpPost]
         [Route("api/game/create")]
@@ -43,7 +41,7 @@ namespace TheBuildersMiddleAges.Game.Host.Controllers
         [Route("api/game/worker/take")]
         public ActionResult TakeWorker([FromBody] ActionRequest request)
         {
-            ActionResponse response = _handler.HandleAction(request, new TakeWorkerCardAction(_game));
+            ActionResponse response = _handler.HandleAction(request, new TakeWorkerCardAction(GameContainer.Instance.GetGame(request.GameGuid)));
 
             return Json(new { response });
         }
