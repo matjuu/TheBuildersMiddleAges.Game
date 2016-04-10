@@ -1,6 +1,6 @@
-﻿namespace TheBuildersMiddleAges.Game.Actions
+﻿namespace TheBuildersMiddleAges.Game.Actions.Actions
 {
-    public class AssignWorker : CardAction
+    public class AssignWorkerAction : CardAction
     {
         public override ActionResponse Do(ActionRequest request)
         {

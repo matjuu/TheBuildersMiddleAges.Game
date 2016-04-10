@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
+using Microsoft.AspNet.Mvc.ModelBinding;
 
 namespace TheBuildersMiddleAges.Game.Actions
 {

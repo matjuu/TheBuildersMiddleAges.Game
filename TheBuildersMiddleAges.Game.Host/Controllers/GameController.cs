@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNet.Http;
 using Microsoft.AspNet.Mvc;
 using TheBuildersMiddleAges.Game.Actions;
 using TheBuildersMiddleAges.Game.Actions.Actions;
@@ -12,13 +13,14 @@ namespace TheBuildersMiddleAges.Game.Host.Controllers
     public class GameController : Controller
     {
         private readonly ActionHandler _handler = new ActionHandler();
+        private Core.Game _game;
 
         [HttpPost]
         [Route("api/game/create")]
         public dynamic CreateGameInstance()
         {
             //TODO: This method should be called by the lobby service when multiplayer is implemented
-            List<Guid> players = new List<Guid> {Guid.NewGuid()};
+            List<Guid> players = new List<Guid> { Guid.NewGuid() };
 
             var gameGuid = GameContainer.Instance.CreateGame(players);
 
@@ -39,23 +41,20 @@ namespace TheBuildersMiddleAges.Game.Host.Controllers
 
         [HttpPost]
         [Route("api/game/worker/take")]
-        public ActionResponse TakeWorker([FromBody] ActionRequest request)
+        public ActionResult TakeWorker([FromBody] ActionRequest request)
         {
-            ActionResponse response = _handler.HandleAction(request, new TakeWorkerCardAction(GameContainer.Instance.GetGame(request.GameGuid)));
-            
-            return response;
+            ActionResponse response = _handler.HandleAction(request, new TakeWorkerCardAction(_game));
+
+            return Json(new { response });
         }
 
         [HttpPost]
         [Route("api/game/building/take")]
-        public string TakeBuilding([FromBody] TakeCardRequest request)
+        public ActionResponse TakeBuilding([FromBody] ActionRequest request)
         {
-            var gameInstance = GameContainer.Instance.GetGame(request.GameGuid);
+            ActionResponse response = _handler.HandleAction(request, new TakeBuildingCardAction(GameContainer.Instance.GetGame(request.GameGuid)));
 
-            if (request.PlayerGuid != null) gameInstance.TakeBuilding(request.PlayerGuid.Value, request.cardId);
-
-            return "Building has been successfully taken";
-
+            return response;
         }
 
         [HttpPost]

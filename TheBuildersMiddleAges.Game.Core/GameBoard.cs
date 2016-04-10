@@ -21,7 +21,7 @@ namespace TheBuildersMiddleAges.Game.Core
 
         public Worker TakeWorker(int workerId)
         {
-            var worker = Workers.First(wrkr => wrkr.Id == workerId);
+            var worker = Workers.FirstOrDefault(wrkr => wrkr.Id == workerId);
 
             if (worker == null)
             {

@@ -1,7 +1,7 @@
 ﻿using System;
 using TheBuildersMiddleAges.Game.Core;
 
-namespace TheBuildersMiddleAges.Game.Actions
+namespace TheBuildersMiddleAges.Game.Actions.Actions
 {
     public abstract class CardAction
     {

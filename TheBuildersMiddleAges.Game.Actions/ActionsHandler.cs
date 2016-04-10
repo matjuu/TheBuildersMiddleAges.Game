@@ -13,7 +13,7 @@ namespace TheBuildersMiddleAges.Game.Actions
             {
                 response = action.Do(request);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 
                 throw;

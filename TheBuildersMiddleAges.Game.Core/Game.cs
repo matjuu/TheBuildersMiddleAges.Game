@@ -41,18 +41,17 @@ namespace TheBuildersMiddleAges.Game.Core
             return newCard.Id;
         }
 
-        public void TakeBuilding(Guid playerGuid, int buildingId)
+        public int DrawBuilding()
         {
-            if (Players.ContainsKey(playerGuid) == false) throw new Exception("Unauthorized");
-            if (GameClock.GetActingPlayerGuid() != playerGuid) throw new Exception("Not the player's turn yet");
+            Building newCard = _buildingsDeck.Draw();
+            GameBoard.AddBuilding(newCard);
 
-            Player player;
-            Players.TryGetValue(playerGuid, out player);
-     
-            var building = GameBoard.TakeBuilding(buildingId);
-            player.TakeBuilding(building);
-            GameBoard.AddBuilding(_buildingsDeck.Draw());
-            CheckIfGameOver();
+            return newCard.Id;
+        }
+
+        public Building TakeBuilding(int buildingId)
+        {
+            return GameBoard.TakeBuilding(buildingId);
         }
 
         public void AssignWorkerToBuilding(Guid playerGuid, int workerId, int buildingId)

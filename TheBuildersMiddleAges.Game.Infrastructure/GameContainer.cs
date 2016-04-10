@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using TheBuildersMiddleAges.Game.Actions;
 using TheBuildersMiddleAges.Game.Core;
 
 namespace TheBuildersMiddleAges.Game.Infrastructure
@@ -33,6 +34,11 @@ namespace TheBuildersMiddleAges.Game.Infrastructure
             _games.TryGetValue(gameGuid, out gameInstance);
 
             return gameInstance;
+        }
+
+        public bool TryGetGame(ActionRequest request, out Core.Game gameInstance)
+        {
+            return _games.TryGetValue(request.GameGuid, out gameInstance);
         }
 
         //TODO: Run this in a separate thread every few minutes to clean up game container (also potentially move this elsewhere)
