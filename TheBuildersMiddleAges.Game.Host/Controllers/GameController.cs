@@ -31,7 +31,7 @@ namespace TheBuildersMiddleAges.Game.Host.Controllers
 
         [HttpPost]
         [Route("api/game/state")]
-        public Core.Game GetGameState([FromBody] BasicRequest request)
+        public Core.Game GetGameState([FromBody] ActionRequest request)
         {
             //TODO: Create or use (?) a mapper to transform Game into GameDto that can be returned (since JSSerializer lacks functionality)
             return GameContainer.Instance.GetGame(request.GameGuid);

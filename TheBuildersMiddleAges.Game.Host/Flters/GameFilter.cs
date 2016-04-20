@@ -10,7 +10,9 @@ namespace TheBuildersMiddleAges.Game.Host.Flters
     {
         public override void OnActionExecuting(ActionExecutingContext actionContext)
         {
-            ActionRequest request = (ActionRequest) actionContext.ActionArguments.Values.ToList()[0];
+            ActionRequest request = (ActionRequest) actionContext.ActionArguments.Values.ToList().FirstOrDefault();
+            if (request == null) return;
+
             Core.Game gameInstance;
 
             if (!GameContainer.Instance.TryGetGame(request, out gameInstance))
