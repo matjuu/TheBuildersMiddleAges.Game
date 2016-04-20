@@ -12,7 +12,7 @@ namespace TheBuildersMiddleAges.Game.Actions.Actions
         public override ActionResponse Do(ActionRequest request)
         {
             Player player = TryGetPlayer(request.PlayerGuid);
-            Building building = Game.TakeBuilding(request.WorkerId);
+            Building building = Game.TakeBuilding(request.BuildingId);
 
             player.TakeBuilding(building);
             int newCard = Game.DrawBuilding();

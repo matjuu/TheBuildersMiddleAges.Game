@@ -57,13 +57,13 @@ namespace TheBuildersMiddleAges.Game.Host.Controllers
 
         [HttpPost]
         [Route("api/game/worker/assign")]
-        public string AssignWorker([FromBody] AssignWorkerRequest request)
+        public ActionResponse AssignWorker([FromBody] ActionRequest request)
         {
-            var gameInstance = GameContainer.Instance.GetGame(request.GameGuid);
 
-            if (request.PlayerGuid != null) gameInstance.AssignWorkerToBuilding(request.PlayerGuid.Value, request.workerId, request.buildingId);
+            ActionResponse response = _handler.HandleAction(request,
+                new AssignWorkerAction(GameContainer.Instance.GetGame(request.GameGuid)));
 
-            return "Worker has been successfully assigned.";
+            return response;
         }
     }
 }
