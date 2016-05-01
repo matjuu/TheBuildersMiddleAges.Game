@@ -2,14 +2,14 @@
 
 namespace TheBuildersMiddleAges.Game.Actions.Actions
 {
-    public class TakeBuildingCardAction : CardAction
+    public class TakeBuildingAction : ActionBase<TakeCardActionResponse>
     {
-        public TakeBuildingCardAction(Core.Game game)
+        public TakeBuildingAction(Core.Game game)
         {
             Game = game;
         }
 
-        public override ActionResponse Do(ActionRequest request)
+        public override TakeCardActionResponse Do(ActionRequest request)
         {
             Player player = TryGetPlayer(request.PlayerGuid);
             Building building = Game.TakeBuilding(request.BuildingId);
@@ -17,7 +17,7 @@ namespace TheBuildersMiddleAges.Game.Actions.Actions
             player.TakeBuilding(building);
             int newCard = Game.DrawBuilding();
 
-            ActionResponse response = new ActionResponse
+            TakeCardActionResponse response = new TakeCardActionResponse
             {
                 Success = true,
                 NewCard = newCard

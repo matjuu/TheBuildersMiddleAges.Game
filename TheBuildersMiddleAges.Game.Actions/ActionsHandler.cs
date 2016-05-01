@@ -1,13 +1,16 @@
 ﻿using System;
+using Microsoft.AspNet.Mvc.ModelBinding;
 using TheBuildersMiddleAges.Game.Actions.Actions;
 
 namespace TheBuildersMiddleAges.Game.Actions
 {
     public class ActionHandler
     {
-        public ActionResponse HandleAction(ActionRequest request, CardAction action)
+        public TResponse HandleAction<TAction, TResponse>(ActionRequest request, TAction action)
+            where TAction : ActionBase<TResponse> 
+            where TResponse : BasicActionResponse
         {
-            ActionResponse response;
+            TResponse response;
 
             try
             {

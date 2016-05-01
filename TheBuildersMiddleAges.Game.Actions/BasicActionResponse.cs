@@ -1,10 +1,7 @@
-﻿using System;
-
 namespace TheBuildersMiddleAges.Game.Actions
 {
-    public class ActionResponse
+    public abstract class BasicActionResponse
     {
         public bool Success;
-        public int NewCard;
     }
 }

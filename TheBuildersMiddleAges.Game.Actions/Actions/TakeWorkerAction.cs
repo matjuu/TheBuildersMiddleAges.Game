@@ -2,14 +2,14 @@
 
 namespace TheBuildersMiddleAges.Game.Actions.Actions
 {
-    public class TakeWorkerCardAction : CardAction
+    public class TakeWorkerAction : ActionBase<TakeCardActionResponse>
     {
-        public TakeWorkerCardAction(Core.Game game)
+        public TakeWorkerAction(Core.Game game)
         {
             Game = game;
         }
 
-        public override ActionResponse Do(ActionRequest request)
+        public override TakeCardActionResponse Do(ActionRequest request)
         {
             Player player = TryGetPlayer(request.PlayerGuid);
             Worker worker = Game.TakeWorker(request.WorkerId);
@@ -17,7 +17,7 @@ namespace TheBuildersMiddleAges.Game.Actions.Actions
             player.HireWorker(worker);
             int newCard = Game.DrawWorker();
 
-            ActionResponse response = new ActionResponse
+            TakeCardActionResponse response = new TakeCardActionResponse
             {
                 Success = true,
                 NewCard = newCard

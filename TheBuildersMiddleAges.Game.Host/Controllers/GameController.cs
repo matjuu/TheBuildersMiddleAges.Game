@@ -41,27 +41,27 @@ namespace TheBuildersMiddleAges.Game.Host.Controllers
         [Route("api/game/worker/take")]
         public ActionResult TakeWorker([FromBody] ActionRequest request)
         {
-            ActionResponse response = _handler.HandleAction(request, new TakeWorkerCardAction(GameContainer.Instance.GetGame(request.GameGuid)));
+            var response = _handler.HandleAction<TakeWorkerAction, TakeCardActionResponse>(request, new TakeWorkerAction(GameContainer.Instance.GetGame(request.GameGuid)));
 
             return Json(new { response });
         }
 
         [HttpPost]
         [Route("api/game/building/take")]
-        public ActionResponse TakeBuilding([FromBody] ActionRequest request)
+        public TakeCardActionResponse TakeBuilding([FromBody] ActionRequest request)
         {
-            ActionResponse response = _handler.HandleAction(request, new TakeBuildingCardAction(GameContainer.Instance.GetGame(request.GameGuid)));
+            TakeCardActionResponse response = _handler.HandleAction<TakeBuildingAction, TakeCardActionResponse>(request, new TakeBuildingAction(GameContainer.Instance.GetGame(request.GameGuid)));
 
             return response;
         }
 
         [HttpPost]
         [Route("api/game/worker/assign")]
-        public ActionResponse AssignWorker([FromBody] ActionRequest request)
+        public BasicActionResponse AssignWorker([FromBody] ActionRequest request)
         {
 
-            ActionResponse response = _handler.HandleAction(request,
-                new AssignWorkerAction(GameContainer.Instance.GetGame(request.GameGuid)));
+            var response = _handler.HandleAction<AssignWorkerAction, BasicActionResponse>
+                (request, new AssignWorkerAction(GameContainer.Instance.GetGame(request.GameGuid)));
 
             return response;
         }

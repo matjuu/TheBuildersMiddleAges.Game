@@ -3,14 +3,14 @@ using TheBuildersMiddleAges.Game.Core;
 
 namespace TheBuildersMiddleAges.Game.Actions.Actions
 {
-    public class AssignWorkerAction : CardAction
+    public class AssignWorkerAction : ActionBase<BasicActionResponse>
     {
         public AssignWorkerAction(Core.Game game)
         {
             Game = game;
         }
 
-        public override ActionResponse Do(ActionRequest request)
+        public override BasicActionResponse Do(ActionRequest request)
         {
             Player player = TryGetPlayer(request.PlayerGuid);
             int workerId = request.WorkerId;
@@ -18,7 +18,7 @@ namespace TheBuildersMiddleAges.Game.Actions.Actions
 
             player.AssignWorkerToBuilding(workerId, buildingId);
 
-            ActionResponse response = new ActionResponse
+            TakeCardActionResponse response = new TakeCardActionResponse
             {
                 Success = true
             };

@@ -3,10 +3,11 @@ using TheBuildersMiddleAges.Game.Core;
 
 namespace TheBuildersMiddleAges.Game.Actions.Actions
 {
-    public abstract class CardAction
+    public abstract class ActionBase<TResponse>
+        where TResponse : BasicActionResponse
     {
         protected Core.Game Game;
-        public abstract ActionResponse Do(ActionRequest request);
+        public abstract TResponse Do(ActionRequest request);
 
         protected Player TryGetPlayer(Guid playerGuid)
         {
