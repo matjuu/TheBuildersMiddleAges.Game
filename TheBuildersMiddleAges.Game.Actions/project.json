@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "Microsoft.AspNet.Mvc.Core": "6.0.0-rc1-final",
-    "TheBuildersMiddleAges.Game.Core": "1.0.0-*"
+    "TheBuildersMiddleAges.Game.Core": "1.0.0-*",
+    "TheBuildersMiddleAges.Game.Infrastructure": "1.0.0-*"
   }
 }

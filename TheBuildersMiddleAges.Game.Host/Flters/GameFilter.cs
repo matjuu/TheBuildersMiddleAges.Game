@@ -15,7 +15,7 @@ namespace TheBuildersMiddleAges.Game.Host.Flters
 
             Core.Game gameInstance;
 
-            if (!GameContainer.Instance.TryGetGame(request, out gameInstance))
+            if (!GameContainer.Instance.TryGetGame(request.GameGuid, out gameInstance))
             {
                 throw new Exception("Game with given Guid does not exist!");
             }

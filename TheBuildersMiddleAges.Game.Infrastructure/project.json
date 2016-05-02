@@ -21,7 +21,6 @@
     }
   },
   "dependencies": {
-    "TheBuildersMiddleAges.Game.Actions": "1.0.0-*",
     "TheBuildersMiddleAges.Game.Core": "1.0.0-*"
   }
 }

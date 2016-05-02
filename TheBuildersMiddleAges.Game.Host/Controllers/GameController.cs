@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.AspNet.Mvc;
+﻿using Microsoft.AspNet.Mvc;
 using TheBuildersMiddleAges.Game.Actions;
 using TheBuildersMiddleAges.Game.Actions.Actions;
 using TheBuildersMiddleAges.Game.Infrastructure;
@@ -16,10 +14,8 @@ namespace TheBuildersMiddleAges.Game.Host.Controllers
         public dynamic CreateGameInstance([FromBody] ActionRequest request)
         {
             //TODO: This method should be called by the lobby service when multiplayer is implemented
-            List<Guid> players = new List<Guid> { Guid.NewGuid() };
-
             var response =
-                _handler.HandleAction<CreateGameAction, CreateGameActionResponse>(request, new CreateGameAction(GameContainer.Instance.CreateGame(players), players));
+                _handler.HandleAction<CreateGameAction, CreateGameActionResponse>(request, new CreateGameAction());
             return response;
         }
 
@@ -29,7 +25,7 @@ namespace TheBuildersMiddleAges.Game.Host.Controllers
         {
             //TODO: Create or use (?) a mapper to transform Game into GameDto that can be returned (since JSSerializer lacks functionality)
             var response =
-                _handler.HandleAction<GetGameStateAction, GetGameStateActionResponse>(request, new GetGameStateAction(GameContainer.Instance.GetGame(request.GameGuid)));
+                _handler.HandleAction<GetGameStateAction, GetGameStateActionResponse>(request, new GetGameStateAction());
             return response;
         }
 

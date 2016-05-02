@@ -1,23 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using TheBuildersMiddleAges.Game.Infrastructure;
 
 namespace TheBuildersMiddleAges.Game.Actions.Actions
 {
     public class GetGameStateAction : ActionBase<GetGameStateActionResponse>
     {
-        public Core.Game CurrentGame;
-        public GetGameStateAction(Core.Game game )
-        {
-            CurrentGame = game;
-        }
-
         public override GetGameStateActionResponse Do(ActionRequest request)
         {
+            Core.Game currentGame = GameContainer.Instance.GetGame(request.GameGuid);
             GetGameStateActionResponse response = new GetGameStateActionResponse
             {
-                Game = CurrentGame,
+                Game = currentGame,
                 Success = true
             };
 

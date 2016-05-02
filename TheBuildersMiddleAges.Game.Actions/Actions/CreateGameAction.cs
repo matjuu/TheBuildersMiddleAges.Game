@@ -1,19 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using TheBuildersMiddleAges.Game.Infrastructure;
 
 namespace TheBuildersMiddleAges.Game.Actions.Actions
 {
     public class CreateGameAction: ActionBase<CreateGameActionResponse>
     {
-        public List<Guid> players;
+        public List<Guid> Players;
         public Guid NewGame;
 
-        public CreateGameAction(Guid game, List<Guid> players)
+        public CreateGameAction()
         {
-            NewGame = game;
-            this.players = players;
+            Players = new List<Guid> {Guid.NewGuid()};
+            NewGame = GameContainer.Instance.CreateGame(Players);
         }
 
         public override CreateGameActionResponse Do(ActionRequest request)
@@ -22,7 +22,7 @@ namespace TheBuildersMiddleAges.Game.Actions.Actions
             CreateGameActionResponse response = new CreateGameActionResponse
             {
                 gameGuid = NewGame,
-                playerGuid = players.First(),
+                playerGuid = Players.First(),
                 Success = true
             };
 
