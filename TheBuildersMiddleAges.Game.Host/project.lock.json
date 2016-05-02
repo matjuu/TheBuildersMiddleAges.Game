@@ -1559,6 +1559,15 @@
           "lib/net45/_._": {}
         }
       },
+      "TheBuildersMiddleAges.Game.Actions/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.5.1",
+        "dependencies": {
+          "Microsoft.AspNet.Mvc.Core": "6.0.0-rc1-final",
+          "TheBuildersMiddleAges.Game.Core": "1.0.0",
+          "TheBuildersMiddleAges.Game.Infrastructure": "1.0.0"
+        }
+      },
       "TheBuildersMiddleAges.Game.Core/1.0.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1"
@@ -3686,6 +3695,20 @@
           "lib/dotnet5.4/System.Xml.XDocument.dll": {}
         }
       },
+      "TheBuildersMiddleAges.Game.Actions/1.0.0": {
+        "type": "project",
+        "framework": ".NETPlatform,Version=v5.4",
+        "dependencies": {
+          "Microsoft.AspNet.Mvc.Core": "6.0.0-rc1-final",
+          "Microsoft.CSharp": "4.0.1-beta-23516",
+          "System.Collections": "4.0.11-beta-23516",
+          "System.Linq": "4.0.1-beta-23516",
+          "System.Runtime": "4.0.21-beta-23516",
+          "System.Threading": "4.0.11-beta-23516",
+          "TheBuildersMiddleAges.Game.Core": "1.0.0",
+          "TheBuildersMiddleAges.Game.Infrastructure": "1.0.0"
+        }
+      },
       "TheBuildersMiddleAges.Game.Core/1.0.0": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
@@ -5270,6 +5293,15 @@
           "lib/net45/_._": {}
         }
       },
+      "TheBuildersMiddleAges.Game.Actions/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.5.1",
+        "dependencies": {
+          "Microsoft.AspNet.Mvc.Core": "6.0.0-rc1-final",
+          "TheBuildersMiddleAges.Game.Core": "1.0.0",
+          "TheBuildersMiddleAges.Game.Infrastructure": "1.0.0"
+        }
+      },
       "TheBuildersMiddleAges.Game.Core/1.0.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1"
@@ -6840,6 +6872,15 @@
         },
         "runtime": {
           "lib/net45/_._": {}
+        }
+      },
+      "TheBuildersMiddleAges.Game.Actions/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.5.1",
+        "dependencies": {
+          "Microsoft.AspNet.Mvc.Core": "6.0.0-rc1-final",
+          "TheBuildersMiddleAges.Game.Core": "1.0.0",
+          "TheBuildersMiddleAges.Game.Infrastructure": "1.0.0"
         }
       },
       "TheBuildersMiddleAges.Game.Core/1.0.0": {
@@ -9376,6 +9417,20 @@
         },
         "runtime": {
           "lib/dotnet5.4/System.Xml.XDocument.dll": {}
+        }
+      },
+      "TheBuildersMiddleAges.Game.Actions/1.0.0": {
+        "type": "project",
+        "framework": ".NETPlatform,Version=v5.4",
+        "dependencies": {
+          "Microsoft.AspNet.Mvc.Core": "6.0.0-rc1-final",
+          "Microsoft.CSharp": "4.0.1-beta-23516",
+          "System.Collections": "4.0.11-beta-23516",
+          "System.Linq": "4.0.1-beta-23516",
+          "System.Runtime": "4.0.21-beta-23516",
+          "System.Threading": "4.0.11-beta-23516",
+          "TheBuildersMiddleAges.Game.Core": "1.0.0",
+          "TheBuildersMiddleAges.Game.Infrastructure": "1.0.0"
         }
       },
       "TheBuildersMiddleAges.Game.Core/1.0.0": {
@@ -11926,6 +11981,20 @@
           "lib/dotnet5.4/System.Xml.XDocument.dll": {}
         }
       },
+      "TheBuildersMiddleAges.Game.Actions/1.0.0": {
+        "type": "project",
+        "framework": ".NETPlatform,Version=v5.4",
+        "dependencies": {
+          "Microsoft.AspNet.Mvc.Core": "6.0.0-rc1-final",
+          "Microsoft.CSharp": "4.0.1-beta-23516",
+          "System.Collections": "4.0.11-beta-23516",
+          "System.Linq": "4.0.1-beta-23516",
+          "System.Runtime": "4.0.21-beta-23516",
+          "System.Threading": "4.0.11-beta-23516",
+          "TheBuildersMiddleAges.Game.Core": "1.0.0",
+          "TheBuildersMiddleAges.Game.Infrastructure": "1.0.0"
+        }
+      },
       "TheBuildersMiddleAges.Game.Core/1.0.0": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
@@ -11952,6 +12021,10 @@
     }
   },
   "libraries": {
+    "TheBuildersMiddleAges.Game.Actions/1.0.0": {
+      "type": "project",
+      "path": "../TheBuildersMiddleAges.Game.Actions/project.json"
+    },
     "TheBuildersMiddleAges.Game.Core/1.0.0": {
       "type": "project",
       "path": "../TheBuildersMiddleAges.Game.Core/project.json"
@@ -16833,6 +16906,8 @@
       "Microsoft.Extensions.Logging >= 1.0.0-rc1-final",
       "Microsoft.Extensions.Logging.Console >= 1.0.0-rc1-final",
       "Microsoft.Extensions.Logging.Debug >= 1.0.0-rc1-final",
+      "TheBuildersMiddleAges.Game.Actions >= 1.0.0-*",
+      "TheBuildersMiddleAges.Game.Core >= 1.0.0-*",
       "TheBuildersMiddleAges.Game.Infrastructure >= 1.0.0-*"
     ],
     "DNX,Version=v4.5.1": [],

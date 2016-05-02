@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using TheBuildersMiddleAges.Game.Host.Flters;
 
 namespace TheBuildersMiddleAges.Game.Host
 {
@@ -26,8 +26,13 @@ namespace TheBuildersMiddleAges.Game.Host
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // Add framework services.
-            services.AddMvc();
+            // AddWorker framework services.
+            services.AddMvc(
+                config =>
+                {
+                    config.Filters.Add(new ExceptionFilter());
+                    config.Filters.Add(new GameFilter());
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
