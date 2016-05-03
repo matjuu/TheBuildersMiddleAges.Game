@@ -20,6 +20,13 @@ namespace TheBuildersMiddleAges.Game.Core
             return card;
         }
 
+        public T GetTopCard()
+        {
+            var card = _cards.Peek();
+
+            return card;
+        }
+
         private void Shuffle()
         {
             //TODO: Implement card shuffling
