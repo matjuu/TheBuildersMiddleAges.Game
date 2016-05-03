@@ -8,27 +8,39 @@ namespace TheBuildersMiddleAges.Game.Core
     {
         private List<Worker> Workers { get; set; } = new List<Worker>();
         private List<Building> Buildings { get; set; } = new List<Building>();
-        private Building TopBuilding { get; set; }
-        private Worker TopWorker { get; set; }
 
-        public void AssignTopBuilding(Building building)
+        private Deck<Worker> _workersDeck = DeckFactory.WorkerDeck();
+        private Deck<Building> _buildingsDeck = DeckFactory.BuildingDeck();
+
+        public Building TopBuilding => _buildingsDeck.GetTopCard();
+        public Worker TopWorker => _workersDeck.GetTopCard();
+
+        public int DrawWorker()
         {
-            TopBuilding = building;
+            Worker newCard = _workersDeck.Draw();
+
+            Workers.Add(newCard);
+
+            return newCard.Id;
         }
 
-        public void AssignTopWorker(Worker worker)
+        public int DrawBuilding()
         {
-            TopWorker = worker;
+            Building newCard = _buildingsDeck.Draw();
+
+            Buildings.Add(newCard);
+
+            return newCard.Id;
         }
 
-        public void AddWorker(Worker worker)
+        public void AddWorker()
         {
-            Workers.Add(worker);
+            Workers.Add(_workersDeck.Draw());
         }
 
-        public void AddBuilding(Building building)
+        public void AddBuilding()
         {
-            Buildings.Add(building);
+            Buildings.Add(_buildingsDeck.Draw());
         }
 
         public Worker TakeWorker(int workerId)
