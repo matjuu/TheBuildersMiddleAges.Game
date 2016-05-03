@@ -8,6 +8,18 @@ namespace TheBuildersMiddleAges.Game.Core
     {
         private List<Worker> Workers { get; set; } = new List<Worker>();
         private List<Building> Buildings { get; set; } = new List<Building>();
+        private Building TopBuilding { get; set; }
+        private Worker TopWorker { get; set; }
+
+        public void AssignTopBuilding(Building building)
+        {
+            TopBuilding = building;
+        }
+
+        public void AssignTopWorker(Worker worker)
+        {
+            TopWorker = worker;
+        }
 
         public void AddWorker(Worker worker)
         {

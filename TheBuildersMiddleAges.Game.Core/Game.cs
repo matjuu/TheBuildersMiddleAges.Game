@@ -14,7 +14,8 @@ namespace TheBuildersMiddleAges.Game.Core
 
         private Deck<Worker> _workersDeck = DeckFactory.WorkerDeck();
         private Deck<Building> _buildingsDeck = DeckFactory.BuildingDeck();
-
+        private Building TopBuilding { get; set; }
+        private Worker TopWorker { get; set; }
 
         public Game(List<Guid> playerGuids)
         {
@@ -24,7 +25,7 @@ namespace TheBuildersMiddleAges.Game.Core
             {
                 Players.Add(playerGuid, new Player());
             }
-            
+
             InitializeGameboard();
         }
 
@@ -36,6 +37,10 @@ namespace TheBuildersMiddleAges.Game.Core
         public int DrawWorker()
         {
             Worker newCard = _workersDeck.Draw();
+
+            GameBoard.AssignTopWorker(_workersDeck.GetTopCard());
+            TopWorker = _workersDeck.GetTopCard();
+
             GameBoard.AddWorker(newCard);
 
             return newCard.Id;
@@ -44,6 +49,10 @@ namespace TheBuildersMiddleAges.Game.Core
         public int DrawBuilding()
         {
             Building newCard = _buildingsDeck.Draw();
+
+            GameBoard.AssignTopBuilding(_buildingsDeck.GetTopCard());
+            TopBuilding = _buildingsDeck.GetTopCard();
+
             GameBoard.AddBuilding(newCard);
 
             return newCard.Id;
