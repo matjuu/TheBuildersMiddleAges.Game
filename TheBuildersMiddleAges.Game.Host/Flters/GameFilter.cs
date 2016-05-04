@@ -19,7 +19,7 @@ namespace TheBuildersMiddleAges.Game.Host.Flters
             {
                 throw new Exception("Game with given Guid does not exist!");
             }
-            if (gameInstance.GameClock.GetActingPlayerGuid() != request.PlayerGuid)
+            if (gameInstance.GameClock.ActingPlayerGuid != request.PlayerGuid)
             {
                 throw new Exception("It's not your turn!");
             }
