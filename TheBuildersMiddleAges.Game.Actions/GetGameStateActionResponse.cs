@@ -1,6 +1,6 @@
 ﻿namespace TheBuildersMiddleAges.Game.Actions
 {
-    public class GetGameStateActionResponse : BasicActionResponse
+    public class GetGameStateActionResponse : ActionResponseBase
     {
         public Core.Game Game;
     }

@@ -59,5 +59,17 @@ namespace TheBuildersMiddleAges.Game.Core
             CompletedBuildings.Add(building);
             Buildings.Remove(building);
         }
+
+        public void SellMove()
+        {
+            //TODO Implement once player has 3 actions per move
+            Coins++;
+        }
+
+        public void BuyMove()
+        {
+            //TODO Implement once player has 3 actions per move
+            throw new NotImplementedException();
+        }
     }
-}
+} 

@@ -4,7 +4,7 @@ using TheBuildersMiddleAges.Game.Core;
 namespace TheBuildersMiddleAges.Game.Actions.Actions
 {
     public abstract class ActionBase<TResponse>
-        where TResponse : BasicActionResponse
+        where TResponse : ActionResponseBase
     {
         protected Core.Game Game;
         public abstract TResponse Do(ActionRequest request);

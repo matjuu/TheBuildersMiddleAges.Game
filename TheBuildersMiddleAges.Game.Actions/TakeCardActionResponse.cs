@@ -2,7 +2,7 @@
 
 namespace TheBuildersMiddleAges.Game.Actions
 {
-    public class TakeCardActionResponse : BasicActionResponse
+    public class TakeCardActionResponse : ActionResponseBase
     {
         public int NewCard;
     }
