@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace TheBuildersMiddleAges.Game.Infrastructure.Models.DTO
 {
@@ -6,6 +7,7 @@ namespace TheBuildersMiddleAges.Game.Infrastructure.Models.DTO
     {
         public List<PlayerDto> Players { get; set; }
         public GameBoardDto GameBoard { get; set; }
-        public string State { get; set; }       
+        public string State { get; set; }
+        public Guid ActingPlayer { get; set; }
     }
 }
