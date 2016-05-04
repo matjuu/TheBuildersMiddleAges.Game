@@ -14,6 +14,7 @@ namespace TheBuildersMiddleAges.Game.Actions.Actions
             var player = TryGetPlayer(request.PlayerGuid);
 
             player.SellMove();
+            Game.GameClock.Tick();
 
             return new BasicActionResponse {Success = true};
         }

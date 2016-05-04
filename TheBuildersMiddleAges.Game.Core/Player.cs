@@ -19,7 +19,6 @@ namespace TheBuildersMiddleAges.Game.Core
 
         public void TakeBuilding(Building building)
         {
-            //TODO: AddWorker Building costs
             Buildings.Add(building);
         }
 
@@ -30,8 +29,9 @@ namespace TheBuildersMiddleAges.Game.Core
 
             if(worker == null) throw new Exception("No worker with specified ID was found.");
             if(building == null) throw new Exception("No building with specified ID was found.");
-            //TODO: AddWorker worker costs
+            if(worker.Cost > Coins) throw new Exception("Not enough coins.");
 
+            Coins -= worker.Cost;
             building.AssignWorker(worker);
             worker.State = WorkerState.Working;
 
@@ -42,6 +42,16 @@ namespace TheBuildersMiddleAges.Game.Core
                 VictoryPoints += building.Reward.VictoryPoints;
                 Coins += building.Reward.Coins;
             }
+        }
+
+        public void SellMove()
+        {
+            Coins++;
+        }
+
+        public void BuyMove()
+        {
+            Coins += 5;
         }
 
         private void ReleaseWorkers(Building building)
@@ -58,18 +68,6 @@ namespace TheBuildersMiddleAges.Game.Core
         {
             CompletedBuildings.Add(building);
             Buildings.Remove(building);
-        }
-
-        public void SellMove()
-        {
-            //TODO Implement once player has 3 actions per move
-            Coins++;
-        }
-
-        public void BuyMove()
-        {
-            //TODO Implement once player has 3 actions per move
-            throw new NotImplementedException();
         }
     }
 } 

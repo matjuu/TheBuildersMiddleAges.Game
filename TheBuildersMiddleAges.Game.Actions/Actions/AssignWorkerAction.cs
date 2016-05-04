@@ -17,6 +17,7 @@ namespace TheBuildersMiddleAges.Game.Actions.Actions
             int buildingId = request.BuildingId;
 
             player.AssignWorkerToBuilding(workerId, buildingId);
+            Game.GameClock.Tick();
 
             TakeCardActionResponse response = new TakeCardActionResponse
             {

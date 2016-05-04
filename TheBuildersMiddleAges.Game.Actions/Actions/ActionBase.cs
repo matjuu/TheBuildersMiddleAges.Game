@@ -12,7 +12,7 @@ namespace TheBuildersMiddleAges.Game.Actions.Actions
         protected Player TryGetPlayer(Guid playerGuid)
         {
             if (Game.Players.ContainsKey(playerGuid) == false) throw new Exception("Unauthorized");
-            if (Game.GameClock.GetActingPlayerGuid() != playerGuid) throw new Exception("Not the player's turn yet");
+            if (Game.GameClock.ActingPlayerGuid != playerGuid) throw new Exception("Not the player's turn yet");
 
             return Game.Players[playerGuid];
         }
