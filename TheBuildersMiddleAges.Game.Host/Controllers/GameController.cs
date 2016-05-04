@@ -49,11 +49,29 @@ namespace TheBuildersMiddleAges.Game.Host.Controllers
 
         [HttpPost]
         [Route("api/game/worker/assign")]
-        public BasicActionResponse AssignWorker([FromBody] ActionRequest request)
+        public ActionResponseBase AssignWorker([FromBody] ActionRequest request)
         {
 
-            var response = _handler.HandleAction<AssignWorkerAction, BasicActionResponse>
+            var response = _handler.HandleAction<AssignWorkerAction, ActionResponseBase>
                 (request, new AssignWorkerAction(GameContainer.Instance.GetGame(request.GameGuid)));
+
+            return response;
+        }
+
+        [HttpPost]
+        [Route("/api/game/move/sell")]
+        public ActionResponseBase SellMove([FromBody] ActionRequest request)
+        {
+            var response = _handler.HandleAction<SellMoveAction, ActionResponseBase>(request, new SellMoveAction());
+
+            return response;
+        }
+
+        [HttpPost]
+        [Route("/api/game/move/buy")]
+        public ActionResponseBase BuyMove([FromBody] ActionRequest request)
+        {
+            var response = _handler.HandleAction<BuyMoveAction, ActionResponseBase>(request, new BuyMoveAction());
 
             return response;
         }

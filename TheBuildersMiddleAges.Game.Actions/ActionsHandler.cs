@@ -1,6 +1,4 @@
-﻿using System;
-using Microsoft.AspNet.Mvc.ModelBinding;
-using TheBuildersMiddleAges.Game.Actions.Actions;
+﻿using TheBuildersMiddleAges.Game.Actions.Actions;
 
 namespace TheBuildersMiddleAges.Game.Actions
 {
@@ -8,19 +6,9 @@ namespace TheBuildersMiddleAges.Game.Actions
     {
         public TResponse HandleAction<TAction, TResponse>(ActionRequest request, TAction action)
             where TAction : ActionBase<TResponse> 
-            where TResponse : BasicActionResponse
+            where TResponse : ActionResponseBase
         {
-            TResponse response;
-
-            try
-            {
-                response = action.Do(request);
-            }
-            catch (Exception ex)
-            {
-                
-                throw;
-            }
+            var response = action.Do(request);
 
             return response;
         }
