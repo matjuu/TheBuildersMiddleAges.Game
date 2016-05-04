@@ -10,6 +10,7 @@ namespace TheBuildersMiddleAges.Game.Actions.Actions
             var player = TryGetPlayer(request.PlayerGuid);
 
             player.BuyMove();
+            Game.GameClock.Tick();
 
             return new BasicActionResponse { Success = true };
         }

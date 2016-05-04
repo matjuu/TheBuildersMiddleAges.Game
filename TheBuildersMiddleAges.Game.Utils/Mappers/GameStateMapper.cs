@@ -74,7 +74,8 @@ namespace TheBuildersMiddleAges.Game.Utils.Mappers
             {
                 Players = playersDtos,
                 GameBoard = gameBoardDto,
-                State = gameState
+                State = gameState,
+                ActingPlayer = game.GameClock.ActingPlayerGuid
             };
 
             return gameDto;

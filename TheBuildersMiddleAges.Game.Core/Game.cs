@@ -47,7 +47,7 @@ namespace TheBuildersMiddleAges.Game.Core
         public void AssignWorkerToBuilding(Guid playerGuid, int workerId, int buildingId)
         {
             if (Players.ContainsKey(playerGuid) == false) throw new Exception("Unauthorized");
-            if (GameClock.GetActingPlayerGuid() != playerGuid) throw new Exception("Not the player's turn yet");
+            if (GameClock.ActingPlayerGuid != playerGuid) throw new Exception("Not the player's turn yet");
 
             Player player;
             Players.TryGetValue(playerGuid, out player);

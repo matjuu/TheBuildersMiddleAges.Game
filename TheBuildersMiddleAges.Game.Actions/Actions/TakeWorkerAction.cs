@@ -15,6 +15,7 @@ namespace TheBuildersMiddleAges.Game.Actions.Actions
             Worker worker = Game.TakeWorker(request.WorkerId);
 
             player.HireWorker(worker);
+            Game.GameClock.Tick();
             int newCard = Game.DrawWorker();
 
             TakeCardActionResponse response = new TakeCardActionResponse

@@ -4,6 +4,7 @@
     {
         public int Id { get; set; }
         public Resources ProducedResources { get; set; }
+        public int Cost { get; set; }
         public WorkerState State { get; set; }
 
         public Worker(int id, Resources producedResources)
