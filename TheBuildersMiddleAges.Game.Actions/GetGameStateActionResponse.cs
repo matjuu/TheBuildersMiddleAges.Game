@@ -1,7 +1,9 @@
-﻿namespace TheBuildersMiddleAges.Game.Actions
+﻿using TheBuildersMiddleAges.Game.Infrastructure.Models.DTO;
+
+namespace TheBuildersMiddleAges.Game.Actions
 {
     public class GetGameStateActionResponse : BasicActionResponse
     {
-        public Core.Game Game;
+        public GameDto Game;
     }
 }

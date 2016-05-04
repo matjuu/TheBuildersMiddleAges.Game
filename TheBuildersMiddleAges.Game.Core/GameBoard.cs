@@ -6,8 +6,8 @@ namespace TheBuildersMiddleAges.Game.Core
 {
     public class GameBoard
     {
-        private List<Worker> Workers { get; set; } = new List<Worker>();
-        private List<Building> Buildings { get; set; } = new List<Building>();
+        public List<Worker> Workers { get; set; } = new List<Worker>();
+        public List<Building> Buildings { get; set; } = new List<Building>();
 
         private Deck<Worker> _workersDeck = DeckFactory.WorkerDeck();
         private Deck<Building> _buildingsDeck = DeckFactory.BuildingDeck();
