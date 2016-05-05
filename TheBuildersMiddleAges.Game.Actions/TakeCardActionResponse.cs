@@ -1,5 +1,4 @@
-﻿using System;
-
+﻿
 namespace TheBuildersMiddleAges.Game.Actions
 {
     public class TakeCardActionResponse : ActionResponseBase

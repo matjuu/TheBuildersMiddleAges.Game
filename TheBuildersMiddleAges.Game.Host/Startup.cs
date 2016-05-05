@@ -31,7 +31,7 @@ namespace TheBuildersMiddleAges.Game.Host
                 config =>
                 {
                     config.Filters.Add(new ExceptionFilter());
-                    config.Filters.Add(new GameFilter());
+                   // config.Filters.Add(new GameFilter());
                 });
         }
 
