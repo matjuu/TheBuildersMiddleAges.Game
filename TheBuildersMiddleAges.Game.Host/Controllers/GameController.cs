@@ -39,7 +39,7 @@ namespace TheBuildersMiddleAges.Game.Host.Controllers
         [HttpPost]
         [GameFilter]
         [Route("api/game/worker/take")]
-        public ActionResult TakeWorker([FromBody] ActionRequest request)
+        public ActionResult TakeWorker(ActionRequest request)
         {
             var response = _handler.HandleAction<TakeWorkerAction, TakeCardActionResponse>(request, new TakeWorkerAction(GameContainer.Instance.GetGame(request.GameGuid)));
 
@@ -50,7 +50,7 @@ namespace TheBuildersMiddleAges.Game.Host.Controllers
         [HttpPost]
         [GameFilter]
         [Route("api/game/building/take")]
-        public TakeCardActionResponse TakeBuilding([FromBody] ActionRequest request)
+        public TakeCardActionResponse TakeBuilding(ActionRequest request)
         {
             TakeCardActionResponse response = _handler.HandleAction<TakeBuildingAction, TakeCardActionResponse>(request, new TakeBuildingAction(GameContainer.Instance.GetGame(request.GameGuid)));
 
@@ -61,7 +61,7 @@ namespace TheBuildersMiddleAges.Game.Host.Controllers
         [HttpPost]
         [GameFilter]
         [Route("api/game/worker/assign")]
-        public ActionResponseBase AssignWorker([FromBody] ActionRequest request)
+        public ActionResponseBase AssignWorker(ActionRequest request)
         {
 
             var response = _handler.HandleAction<AssignWorkerAction, ActionResponseBase>
