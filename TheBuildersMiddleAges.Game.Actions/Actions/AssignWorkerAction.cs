@@ -1,17 +1,13 @@
-﻿using System.Threading;
-using TheBuildersMiddleAges.Game.Core;
+﻿using TheBuildersMiddleAges.Game.Core;
+using TheBuildersMiddleAges.Game.Infrastructure;
 
 namespace TheBuildersMiddleAges.Game.Actions.Actions
 {
     public class AssignWorkerAction : ActionBase<ActionResponseBase>
     {
-        public AssignWorkerAction(Core.Game game)
-        {
-            Game = game;
-        }
-
         public override ActionResponseBase Do(ActionRequest request)
         {
+            Game = GameContainer.Instance.GetGame(request.GameGuid);
             Player player = TryGetPlayer(request.PlayerGuid);
             int workerId = request.WorkerId;
             int buildingId = request.BuildingId;
