@@ -14,7 +14,7 @@ namespace TheBuildersMiddleAges.Game.Host.Controllers
 
         [HttpPost]
         [Route("api/game/create")]
-        public dynamic CreateGameInstance([FromBody] ActionRequest request)
+        public dynamic CreateGameInstance(ActionRequest request)
         {
             //TODO: This method should be called by the lobby service when multiplayer is implemented
             var response =
@@ -26,7 +26,7 @@ namespace TheBuildersMiddleAges.Game.Host.Controllers
 
         [HttpPost]
         [Route("api/game/state")]
-        public GetGameStateActionResponse GetGameState([FromBody] ActionRequest request)
+        public GetGameStateActionResponse GetGameState(ActionRequest request)
         {
             //TODO: Create or use (?) a mapper to transform Game into GameDto that can be returned (since JSSerializer lacks functionality)
             var response =

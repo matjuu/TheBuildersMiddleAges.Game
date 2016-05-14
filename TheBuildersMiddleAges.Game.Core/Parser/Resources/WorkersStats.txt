@@ -40,11 +40,3 @@
 40, Craftsman, [1, 0, 3, 0], 4
 41, Laborer, [0, 2, 1, 0], 3
 42, Craftsman, [2, 0, 0, 2], 4
-43, The Tile Oven, [0, 0, 0, 3], 0
-44, The Crane, [2, 0, 0, 0], 0
-45, The Tile Oven, [0, 0, 0, 2], 0
-46, The Crane, [3, 0, 0, 0], 0
-47, The Circular Saw, [0, 3, 0, 0], 0
-48, The Circular Saw, [0, 2, 0, 0], 0
-49, The Survey Tools, [0, 0, 2, 0], 0
-50, The Survey Tools, [0, 0, 3, 0], 0
