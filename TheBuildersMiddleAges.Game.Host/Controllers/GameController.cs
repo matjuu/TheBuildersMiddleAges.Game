@@ -26,7 +26,7 @@ namespace TheBuildersMiddleAges.Game.Host.Controllers
 
         [HttpPost]
         [Route("api/game/state")]
-        public GetGameStateActionResponse GetGameState(ActionRequest request)
+        public GetGameStateActionResponse GetGameState([FromBody] ActionRequest request)
         {
             //TODO: Create or use (?) a mapper to transform Game into GameDto that can be returned (since JSSerializer lacks functionality)
             var response =
@@ -39,7 +39,7 @@ namespace TheBuildersMiddleAges.Game.Host.Controllers
         [HttpPost]
         [GameFilter]
         [Route("api/game/worker/take")]
-        public ActionResult TakeWorker(ActionRequest request)
+        public ActionResult TakeWorker([FromBody]ActionRequest request)
         {
             var response = _handler.HandleAction<TakeWorkerAction, TakeCardActionResponse>(request, new TakeWorkerAction(GameContainer.Instance.GetGame(request.GameGuid)));
 
@@ -50,7 +50,7 @@ namespace TheBuildersMiddleAges.Game.Host.Controllers
         [HttpPost]
         [GameFilter]
         [Route("api/game/building/take")]
-        public TakeCardActionResponse TakeBuilding(ActionRequest request)
+        public TakeCardActionResponse TakeBuilding([FromBody]ActionRequest request)
         {
             TakeCardActionResponse response = _handler.HandleAction<TakeBuildingAction, TakeCardActionResponse>(request, new TakeBuildingAction(GameContainer.Instance.GetGame(request.GameGuid)));
 
@@ -61,7 +61,7 @@ namespace TheBuildersMiddleAges.Game.Host.Controllers
         [HttpPost]
         [GameFilter]
         [Route("api/game/worker/assign")]
-        public ActionResponseBase AssignWorker(ActionRequest request)
+        public ActionResponseBase AssignWorker([FromBody]ActionRequest request)
         {
 
             var response = _handler.HandleAction<AssignWorkerAction, ActionResponseBase>
