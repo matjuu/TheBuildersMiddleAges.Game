@@ -65,7 +65,8 @@ namespace TheBuildersMiddleAges.Game.Utils.Mappers
                     Guid = player.Key,
                     Buildings = playerBuildings,
                     Workers = playerWorkers,
-                    VictoryPoints = player.Value.VictoryPoints
+                    VictoryPoints = player.Value.VictoryPoints,
+                    PlayerCoins = player.Value.Coins
                 };
                 playersDtos.Add(playerDto);
             }

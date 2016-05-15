@@ -15,13 +15,22 @@ namespace TheBuildersMiddleAges.Game.Actions.Actions
             Player player = TryGetPlayer(request.PlayerGuid);
             int workerId = request.WorkerId;
             int buildingId = request.BuildingId;
-
-            BuildingState buildingState = player.AssignWorkerToBuilding(workerId, buildingId);
+            bool success;
+            BuildingState buildingState = BuildingState.InProgress;
+            if (player.HasEnoughCoins(workerId))
+            {
+                buildingState = player.AssignWorkerToBuilding(workerId, buildingId);
+                success = true;
+            }
+            else
+            {
+                success = false;
+            }
             Game.GameClock.Tick();
 
             AssignWorkerActionResponse response = new AssignWorkerActionResponse
             {
-                Success = true,
+                Success = success,
                 BuildingCompleted = buildingState == BuildingState.Completed
             };
 
