@@ -7,8 +7,8 @@ namespace TheBuildersMiddleAges.Game.Core
     public class Player
     {
         public List<Worker> Workers { get; private set; } = new List<Worker>();
-        public List<Building> Buildings { get; private set; } = new List<Building>();
-        public List<Building> CompletedBuildings { get; private set; } = new List<Building>();
+        public List<Building.Building> Buildings { get; private set; } = new List<Building.Building>();
+        public List<Building.Building> CompletedBuildings { get; private set; } = new List<Building.Building>();
         public int VictoryPoints { get; private set; }
         public int Coins { get; private set; } = 20;
 
@@ -17,12 +17,12 @@ namespace TheBuildersMiddleAges.Game.Core
             Workers.Add(worker);
         }
 
-        public void TakeBuilding(Building building)
+        public void TakeBuilding(Building.Building building)
         {
             Buildings.Add(building);
         }
 
-        public void AssignWorkerToBuilding(int workerId, int buildingId)
+        public BuildingState AssignWorkerToBuilding(int workerId, int buildingId)
         {
             var worker = Workers.FirstOrDefault(wrkr => wrkr.Id == workerId);
             var building = Buildings.FirstOrDefault(bldng => bldng.Id == buildingId);
@@ -41,7 +41,11 @@ namespace TheBuildersMiddleAges.Game.Core
                 ReleaseWorkers(building);
                 VictoryPoints += building.Reward.VictoryPoints;
                 Coins += building.Reward.Coins;
+
+                return BuildingState.Completed;
             }
+
+            return BuildingState.InProgress;
         }
 
         public void SellMove()
@@ -54,7 +58,7 @@ namespace TheBuildersMiddleAges.Game.Core
             Coins += 5;
         }
 
-        private void ReleaseWorkers(Building building)
+        private void ReleaseWorkers(Building.Building building)
         {
             var workerIds = building.AssignedWorkers.Select(x => x.Id);
             var workers = Workers.Where(x => workerIds.Contains(x.Id));
@@ -64,7 +68,7 @@ namespace TheBuildersMiddleAges.Game.Core
             }
         }
 
-        private void MoveBuildingToCompleted(Building building)
+        private void MoveBuildingToCompleted(Building.Building building)
         {
             CompletedBuildings.Add(building);
             Buildings.Remove(building);

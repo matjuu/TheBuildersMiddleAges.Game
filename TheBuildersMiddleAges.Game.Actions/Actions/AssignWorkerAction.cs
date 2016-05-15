@@ -3,25 +3,26 @@ using TheBuildersMiddleAges.Game.Core;
 
 namespace TheBuildersMiddleAges.Game.Actions.Actions
 {
-    public class AssignWorkerAction : ActionBase<ActionResponseBase>
+    public class AssignWorkerAction : ActionBase<AssignWorkerActionResponse>
     {
         public AssignWorkerAction(Core.Game game)
         {
             Game = game;
         }
 
-        public override ActionResponseBase Do(ActionRequest request)
+        public override AssignWorkerActionResponse Do(ActionRequest request)
         {
             Player player = TryGetPlayer(request.PlayerGuid);
             int workerId = request.WorkerId;
             int buildingId = request.BuildingId;
 
-            player.AssignWorkerToBuilding(workerId, buildingId);
+            BuildingState buildingState = player.AssignWorkerToBuilding(workerId, buildingId);
             Game.GameClock.Tick();
 
-            TakeCardActionResponse response = new TakeCardActionResponse
+            AssignWorkerActionResponse response = new AssignWorkerActionResponse
             {
-                Success = true
+                Success = true,
+                BuildingCompleted = buildingState == BuildingState.Completed
             };
 
             return response;
