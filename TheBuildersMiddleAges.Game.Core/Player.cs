@@ -29,8 +29,8 @@ namespace TheBuildersMiddleAges.Game.Core
 
             if(worker == null) throw new Exception("No worker with specified ID was found.");
             if(building == null) throw new Exception("No building with specified ID was found.");
-            if(worker.Cost > Coins) throw new Exception("Not enough coins.");
-
+                //throw new Exception("Not enough coins.");
+            
             Coins -= worker.Cost;
             building.AssignWorker(worker);
             worker.State = WorkerState.Working;
@@ -46,6 +46,16 @@ namespace TheBuildersMiddleAges.Game.Core
             }
 
             return BuildingState.InProgress;
+        }
+
+        public bool HasEnoughCoins(int workerId)
+        {
+            var worker = Workers.FirstOrDefault(wrkr => wrkr.Id == workerId);
+            if (worker != null && worker.Cost > Coins)
+            {
+                return false;
+            }
+            return true;
         }
 
         public void SellMove()

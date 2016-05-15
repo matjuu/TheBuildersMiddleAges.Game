@@ -47,7 +47,7 @@ namespace TheBuildersMiddleAges.Game.Core.Parser
                     line = Regex.Replace(line, @",,", ",");
                     string[] stats = Regex.Split(line, @",");
                     int[] parsedStats = stats.Select(int.Parse).ToArray();
-                    cards.Add(new Worker(parsedStats[0], new Resources(parsedStats[1], parsedStats[2], parsedStats[3], parsedStats[4])));
+                    cards.Add(new Worker(parsedStats[0], new Resources(parsedStats[1], parsedStats[2], parsedStats[3], parsedStats[4]), parsedStats[5]));
                 }
             }
 
