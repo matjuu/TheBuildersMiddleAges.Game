@@ -5,7 +5,7 @@
         public int Coins { get; set; }
         public int VictoryPoints { get; set; }
 
-        public Reward(int coins, int victoryPoints)
+        public Reward(int victoryPoints, int coins)
         {
             Coins = coins;
             VictoryPoints = victoryPoints;
