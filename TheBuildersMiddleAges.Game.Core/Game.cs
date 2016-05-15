@@ -39,7 +39,7 @@ namespace TheBuildersMiddleAges.Game.Core
             return GameBoard.DrawBuilding();
         }
 
-        public Building TakeBuilding(int buildingId)
+        public Building.Building TakeBuilding(int buildingId)
         {
             return GameBoard.TakeBuilding(buildingId);
         }

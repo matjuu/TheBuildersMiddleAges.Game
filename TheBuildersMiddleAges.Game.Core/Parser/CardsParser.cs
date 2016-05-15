@@ -7,10 +7,10 @@ namespace TheBuildersMiddleAges.Game.Core.Parser
 {
     public static class CardsParser
     {
-        public static Deck<Building> ParseBuildingsDeck()
+        public static Deck<Building.Building> ParseBuildingsDeck()
         {
 
-            var cards = new List<Building>();
+            var cards = new List<Building.Building>();
             string line;
 
             using (var stream = new FileStream("../TheBuildersMiddleAges.Game.Core/Parser/Resources/BuildingsStats.txt", FileMode.Open))
@@ -22,13 +22,13 @@ namespace TheBuildersMiddleAges.Game.Core.Parser
                     line = Regex.Replace(line, @",,", ",");
                     string[] stats = Regex.Split(line, @",");
                     int[] parsedStats = stats.Select(int.Parse).ToArray();
-                    cards.Add(new Building(parsedStats[0],
+                    cards.Add(new Building.Building(parsedStats[0],
                         new Resources(parsedStats[1], parsedStats[2], parsedStats[3], parsedStats[4]),
                         new Reward(parsedStats[5], parsedStats[6])));
                 }
             }
           
-            return new Deck<Building>(cards);
+            return new Deck<Building.Building>(cards);
         }
 
         public static Deck<Worker> ParseWorkersDeck()

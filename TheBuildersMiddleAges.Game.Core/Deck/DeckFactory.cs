@@ -2,7 +2,7 @@
 {
     public static class DeckFactory
     {
-        public static Deck<Building> BuildingDeck()
+        public static Deck<Building.Building> BuildingDeck()
         {   
             return Parser.CardsParser.ParseBuildingsDeck();
         }
