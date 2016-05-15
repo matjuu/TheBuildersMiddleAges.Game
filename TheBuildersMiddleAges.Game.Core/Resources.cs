@@ -5,10 +5,10 @@ namespace TheBuildersMiddleAges.Game.Core
 {
     public class Resources
     {
-        public int Stone { get; set; }
-        public int Wood { get; set; }
-        public int Knowledge { get; set; }
-        public int Tile { get; set; }
+        private int Stone { get; set; }
+        private int Wood { get; set; }
+        private int Knowledge { get; set; }
+        private int Tile { get; set; }
 
         public Resources(int stone, int wood, int knowledge, int tile)
         {
@@ -18,12 +18,25 @@ namespace TheBuildersMiddleAges.Game.Core
             Tile = tile;
         }
 
-        public void Add(Resources resources)
+        public static Resources operator - (Resources from, Resources what)
         {
-            Stone += resources.Stone;
-            Wood += resources.Wood;
-            Knowledge += resources.Knowledge;
-            Tile += resources.Tile;
+            from.Knowledge -= what.Knowledge;
+            from.Stone -= what.Stone;
+            from.Wood -= what.Wood;
+            from.Tile -= what.Tile;
+
+            return from;
+        }
+
+        public bool NothingLeft()
+        {
+            bool result = 
+                   Stone <= 0 
+                && Wood <= 0 
+                && Knowledge <= 0
+                && Tile <= 0;
+
+            return result;
         }
     }
 }

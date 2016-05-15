@@ -1,4 +1,5 @@
 ﻿using TheBuildersMiddleAges.Game.Core;
+using TheBuildersMiddleAges.Game.Core.Building;
 
 namespace TheBuildersMiddleAges.Game.Actions.Actions
 {
@@ -17,11 +18,13 @@ namespace TheBuildersMiddleAges.Game.Actions.Actions
             player.TakeBuilding(building);
             Game.GameClock.Tick();
             int newCard = Game.DrawBuilding();
+            int topCard = Game.GameBoard.TopBuilding.Id;
 
             TakeCardActionResponse response = new TakeCardActionResponse
             {
                 Success = true,
-                NewCard = newCard
+                NewCard = newCard,
+                TopCard = topCard
             };
 
             return response;

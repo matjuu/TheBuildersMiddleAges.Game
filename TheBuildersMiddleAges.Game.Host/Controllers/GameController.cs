@@ -63,8 +63,7 @@ namespace TheBuildersMiddleAges.Game.Host.Controllers
         [Route("api/game/worker/assign")]
         public ActionResponseBase AssignWorker(ActionRequest request)
         {
-
-            var response = _handler.HandleAction<AssignWorkerAction, ActionResponseBase>
+            var response = _handler.HandleAction<AssignWorkerAction, AssignWorkerActionResponse>
                 (request, new AssignWorkerAction(GameContainer.Instance.GetGame(request.GameGuid)));
 
             Response.Headers.Add(new KeyValuePair<string, StringValues>("Access-Control-Allow-Origin", "*"));

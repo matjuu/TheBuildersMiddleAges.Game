@@ -7,12 +7,12 @@ namespace TheBuildersMiddleAges.Game.Core
     public class GameBoard
     {
         public List<Worker> Workers { get; set; } = new List<Worker>();
-        public List<Building> Buildings { get; set; } = new List<Building>();
+        public List<Building.Building> Buildings { get; set; } = new List<Building.Building>();
 
         private Deck<Worker> _workersDeck = DeckFactory.WorkerDeck();
-        private Deck<Building> _buildingsDeck = DeckFactory.BuildingDeck();
+        private Deck<Building.Building> _buildingsDeck = DeckFactory.BuildingDeck();
 
-        public Building TopBuilding => _buildingsDeck.GetTopCard();
+        public Building.Building TopBuilding => _buildingsDeck.GetTopCard();
         public Worker TopWorker => _workersDeck.GetTopCard();
 
         public int DrawWorker()
@@ -26,7 +26,7 @@ namespace TheBuildersMiddleAges.Game.Core
 
         public int DrawBuilding()
         {
-            Building newCard = _buildingsDeck.Draw();
+            Building.Building newCard = _buildingsDeck.Draw();
 
             Buildings.Add(newCard);
 
@@ -57,7 +57,7 @@ namespace TheBuildersMiddleAges.Game.Core
             return worker;
         }
 
-        public Building TakeBuilding(int buildingId)
+        public Building.Building TakeBuilding(int buildingId)
         {
             var building = Buildings.First(bldngs => bldngs.Id == buildingId);
 

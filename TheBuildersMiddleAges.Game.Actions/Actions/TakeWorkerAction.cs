@@ -17,11 +17,13 @@ namespace TheBuildersMiddleAges.Game.Actions.Actions
             player.HireWorker(worker);
             Game.GameClock.Tick();
             int newCard = Game.DrawWorker();
+            int topCard = Game.GameBoard.TopWorker.Id;
 
             TakeCardActionResponse response = new TakeCardActionResponse
             {
                 Success = true,
-                NewCard = newCard
+                NewCard = newCard,
+                TopCard = topCard
             };
 
             return response;
