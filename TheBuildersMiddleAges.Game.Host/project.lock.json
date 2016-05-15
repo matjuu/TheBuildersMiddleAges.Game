@@ -1550,6 +1550,15 @@
           "lib/net45/_._": {}
         }
       },
+      "System.Text.RegularExpressions/4.0.11-beta-23516": {
+        "type": "package",
+        "compile": {
+          "ref/net45/_._": {}
+        },
+        "runtime": {
+          "lib/net45/_._": {}
+        }
+      },
       "System.Threading/4.0.0": {
         "type": "package",
         "compile": {
@@ -1571,7 +1580,10 @@
       },
       "TheBuildersMiddleAges.Game.Core/1.0.0": {
         "type": "project",
-        "framework": ".NETFramework,Version=v4.5.1"
+        "framework": ".NETFramework,Version=v4.5.1",
+        "dependencies": {
+          "System.Text.RegularExpressions": "4.0.11-beta-23516"
+        }
       },
       "TheBuildersMiddleAges.Game.Infrastructure/1.0.0": {
         "type": "project",
@@ -3725,8 +3737,11 @@
         "dependencies": {
           "Microsoft.CSharp": "4.0.1-beta-23516",
           "System.Collections": "4.0.11-beta-23516",
+          "System.IO": "4.0.11-beta-23516",
+          "System.IO.FileSystem": "4.0.1-beta-23516",
           "System.Linq": "4.0.1-beta-23516",
           "System.Runtime": "4.0.21-beta-23516",
+          "System.Text.RegularExpressions": "4.0.11-beta-23516",
           "System.Threading": "4.0.11-beta-23516"
         }
       },
@@ -5307,6 +5322,15 @@
           "lib/net45/_._": {}
         }
       },
+      "System.Text.RegularExpressions/4.0.11-beta-23516": {
+        "type": "package",
+        "compile": {
+          "ref/net45/_._": {}
+        },
+        "runtime": {
+          "lib/net45/_._": {}
+        }
+      },
       "System.Threading/4.0.0": {
         "type": "package",
         "compile": {
@@ -5328,7 +5352,10 @@
       },
       "TheBuildersMiddleAges.Game.Core/1.0.0": {
         "type": "project",
-        "framework": ".NETFramework,Version=v4.5.1"
+        "framework": ".NETFramework,Version=v4.5.1",
+        "dependencies": {
+          "System.Text.RegularExpressions": "4.0.11-beta-23516"
+        }
       },
       "TheBuildersMiddleAges.Game.Infrastructure/1.0.0": {
         "type": "project",
@@ -6897,6 +6924,15 @@
           "lib/net45/_._": {}
         }
       },
+      "System.Text.RegularExpressions/4.0.11-beta-23516": {
+        "type": "package",
+        "compile": {
+          "ref/net45/_._": {}
+        },
+        "runtime": {
+          "lib/net45/_._": {}
+        }
+      },
       "System.Threading/4.0.0": {
         "type": "package",
         "compile": {
@@ -6918,7 +6954,10 @@
       },
       "TheBuildersMiddleAges.Game.Core/1.0.0": {
         "type": "project",
-        "framework": ".NETFramework,Version=v4.5.1"
+        "framework": ".NETFramework,Version=v4.5.1",
+        "dependencies": {
+          "System.Text.RegularExpressions": "4.0.11-beta-23516"
+        }
       },
       "TheBuildersMiddleAges.Game.Infrastructure/1.0.0": {
         "type": "project",
@@ -9481,8 +9520,11 @@
         "dependencies": {
           "Microsoft.CSharp": "4.0.1-beta-23516",
           "System.Collections": "4.0.11-beta-23516",
+          "System.IO": "4.0.11-beta-23516",
+          "System.IO.FileSystem": "4.0.1-beta-23516",
           "System.Linq": "4.0.1-beta-23516",
           "System.Runtime": "4.0.21-beta-23516",
+          "System.Text.RegularExpressions": "4.0.11-beta-23516",
           "System.Threading": "4.0.11-beta-23516"
         }
       },
@@ -12057,8 +12099,11 @@
         "dependencies": {
           "Microsoft.CSharp": "4.0.1-beta-23516",
           "System.Collections": "4.0.11-beta-23516",
+          "System.IO": "4.0.11-beta-23516",
+          "System.IO.FileSystem": "4.0.1-beta-23516",
           "System.Linq": "4.0.1-beta-23516",
           "System.Runtime": "4.0.21-beta-23516",
+          "System.Text.RegularExpressions": "4.0.11-beta-23516",
           "System.Threading": "4.0.11-beta-23516"
         }
       },

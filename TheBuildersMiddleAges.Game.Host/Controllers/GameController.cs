@@ -14,7 +14,7 @@ namespace TheBuildersMiddleAges.Game.Host.Controllers
 
         [HttpPost]
         [Route("api/game/create")]
-        public dynamic CreateGameInstance([FromBody] ActionRequest request)
+        public dynamic CreateGameInstance(ActionRequest request)
         {
             //TODO: This method should be called by the lobby service when multiplayer is implemented
             var response =
