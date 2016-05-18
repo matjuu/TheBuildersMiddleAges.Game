@@ -6,6 +6,7 @@ using Microsoft.AspNet.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Swashbuckle.SwaggerGen;
 using TheBuildersMiddleAges.Game.Host.Flters;
 
 namespace TheBuildersMiddleAges.Game.Host
@@ -33,6 +34,24 @@ namespace TheBuildersMiddleAges.Game.Host
                     config.Filters.Add(new ExceptionFilter());
                    // config.Filters.Add(new GameFilter());
                 });
+
+            // AddSwagger
+            services.AddSwaggerGen();
+            services.ConfigureSwaggerDocument(options =>
+            {
+                options.SingleApiVersion(new Info
+                {
+                    Version = "v1",
+                    Title = "The Builders Middle Ages Game Host API",
+                    Description = "API using Swagger and Swashbuckle",
+                    TermsOfService = ""
+                });
+                
+
+            });
+            services.ConfigureSwaggerSchema(options => {
+                options.DescribeAllEnumsAsStrings = true;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,6 +65,9 @@ namespace TheBuildersMiddleAges.Game.Host
             app.UseStaticFiles();
 
             app.UseMvc();
+
+            app.UseSwaggerGen();
+            app.UseSwaggerUi();
         }
 
         // Entry point for the application.

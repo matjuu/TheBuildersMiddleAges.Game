@@ -12,6 +12,11 @@ namespace TheBuildersMiddleAges.Game.Host.Controllers
     {
         private readonly ActionHandler _handler = new ActionHandler();
 
+        /// <summary>
+        /// Creates new game instance
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("api/game/create")]
         public dynamic CreateGameInstance(ActionRequest request)
@@ -24,6 +29,11 @@ namespace TheBuildersMiddleAges.Game.Host.Controllers
             return response;
         }
 
+        /// <summary>
+        /// Returns current game state
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("api/game/state")]
         public GetGameStateActionResponse GetGameState(ActionRequest request)
@@ -36,6 +46,11 @@ namespace TheBuildersMiddleAges.Game.Host.Controllers
             return response;
         }
 
+        /// <summary>
+        /// Takes worker from the table and adds it to hand
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         [HttpPost]
         [GameFilter]
         [Route("api/game/worker/take")]
@@ -47,6 +62,11 @@ namespace TheBuildersMiddleAges.Game.Host.Controllers
             return Json(new { response });
         }
 
+        /// <summary>
+        /// Takes building from table and adds it to hand
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         [HttpPost]
         [GameFilter]
         [Route("api/game/building/take")]
@@ -58,6 +78,11 @@ namespace TheBuildersMiddleAges.Game.Host.Controllers
             return response;
         }
 
+        /// <summary>
+        /// Assigns worker to chosen building to start building.
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         [HttpPost]
         [GameFilter]
         [Route("api/game/worker/assign")]
