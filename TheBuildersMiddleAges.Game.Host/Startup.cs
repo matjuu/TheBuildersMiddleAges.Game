@@ -46,6 +46,7 @@ namespace TheBuildersMiddleAges.Game.Host
                     Description = "API using Swagger and Swashbuckle",
                     TermsOfService = ""
                 });
+                
 
             });
             services.ConfigureSwaggerSchema(options => {
