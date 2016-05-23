@@ -18,7 +18,6 @@ namespace TheBuildersMiddleAges.Game.Actions.Actions
                 Building building = Game.TakeBuilding(request.BuildingId);
 
                 player.TakeBuilding(building);
-                //Game.GameClock.Tick();
                 int newCard = Game.DrawBuilding();
                 int topCard = Game.GameBoard.TopBuilding.Id;
 

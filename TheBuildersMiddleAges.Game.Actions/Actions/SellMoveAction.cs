@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using TheBuildersMiddleAges.Game.Infrastructure;
+﻿using TheBuildersMiddleAges.Game.Infrastructure;
 
 namespace TheBuildersMiddleAges.Game.Actions.Actions
 {
@@ -12,11 +8,18 @@ namespace TheBuildersMiddleAges.Game.Actions.Actions
         {
             Game = GameContainer.Instance.GetGame(request.GameGuid);
             var player = TryGetPlayer(request.PlayerGuid);
+            bool success;
+            if (Game.GameClock.Tick())
+            {
+                player.SellMove();
+                success = true;
+            }
+            else
+            {
+                success = false;
+            }
 
-            player.SellMove();
-            Game.GameClock.Tick();
-
-            return new BasicActionResponse {Success = true};
+            return new BasicActionResponse {Success = success};
         }
     }
 }

@@ -98,7 +98,7 @@ namespace TheBuildersMiddleAges.Game.Host.Controllers
         [HttpPost]
         [GameFilter]
         [Route("/api/game/move/sell")]
-        public ActionResponseBase SellMove([FromBody] ActionRequest request)
+        public ActionResponseBase SellMove(ActionRequest request)
         {
             var response = _handler.HandleAction<SellMoveAction, ActionResponseBase>(request, new SellMoveAction());
 
@@ -109,7 +109,7 @@ namespace TheBuildersMiddleAges.Game.Host.Controllers
         [HttpPost]
         [GameFilter]
         [Route("/api/game/move/buy")]
-        public ActionResponseBase BuyMove([FromBody] ActionRequest request)
+        public ActionResponseBase BuyMove(ActionRequest request)
         {
             var response = _handler.HandleAction<BuyMoveAction, ActionResponseBase>(request, new BuyMoveAction());
 

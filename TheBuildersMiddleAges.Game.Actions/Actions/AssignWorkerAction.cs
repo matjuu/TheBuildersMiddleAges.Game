@@ -19,23 +19,21 @@ namespace TheBuildersMiddleAges.Game.Actions.Actions
             bool success;
             bool enoughActions = Game.GameClock.Tick();
             BuildingState buildingState = BuildingState.InProgress;
+
             if (player.HasEnoughCoins(workerId) && enoughActions)
             {
                 buildingState = player.AssignWorkerToBuilding(workerId, buildingId);
                 success = true;
-                enoughActions = true;
             }
             else if(player.HasEnoughCoins(workerId) && enoughActions == false)
             {
                 success = true;
-                enoughActions = false;
             }
             else
             {
                 success = false;
                 enoughActions = true;
             }
-            //Game.GameClock.Tick();
 
             AssignWorkerActionResponse response = new AssignWorkerActionResponse
             {

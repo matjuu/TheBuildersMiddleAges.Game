@@ -17,7 +17,6 @@ namespace TheBuildersMiddleAges.Game.Actions.Actions
                 Worker worker = Game.TakeWorker(request.WorkerId);
 
                 player.HireWorker(worker);
-                //Game.GameClock.Tick();
                 int newCard = Game.DrawWorker();
                 int topCard = Game.GameBoard.TopWorker.Id;
 
@@ -33,10 +32,6 @@ namespace TheBuildersMiddleAges.Game.Actions.Actions
             else
             {
                 Player player = TryGetPlayer(request.PlayerGuid);
-                //Worker worker = Game.TakeWorker(request.WorkerId);
-
-                //player.HireWorker(worker);
-                //Game.GameClock.Tick();
                 int newCard = Game.GameBoard.TopWorker.Id;
                 int topCard = Game.GameBoard.TopWorker.Id;
 
