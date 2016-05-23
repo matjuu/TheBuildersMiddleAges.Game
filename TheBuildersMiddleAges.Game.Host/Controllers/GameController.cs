@@ -116,5 +116,27 @@ namespace TheBuildersMiddleAges.Game.Host.Controllers
             Response.Headers.Add(new KeyValuePair<string, StringValues>("Access-Control-Allow-Origin", "*"));
             return response;
         }
+
+        [HttpPost]
+        [GameFilter]
+        [Route("/api/game/player/endTurn")]
+        public ActionResponseBase EndTurn(ActionRequest request)
+        {
+            var response = _handler.HandleAction<EndTurnAction, ActionResponseBase>(request, new EndTurnAction());
+
+            Response.Headers.Add(new KeyValuePair<string, StringValues>("Access-Control-Allow-Origin", "*"));
+            return response;
+        }
+
+        [HttpPost]
+        [GameFilter]
+        [Route("/api/game/building/startBuilding")]
+        public ActionResponseBase StartBuilding(ActionRequest request)
+        {
+            var response = _handler.HandleAction<StartBuildingAction, ActionResponseBase>(request, new StartBuildingAction());
+
+            Response.Headers.Add(new KeyValuePair<string, StringValues>("Access-Control-Allow-Origin", "*"));
+            return response;
+        }
     }
 }

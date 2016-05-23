@@ -12,26 +12,36 @@ namespace TheBuildersMiddleAges.Game.Actions.Actions
 
         public override AssignWorkerActionResponse Do(ActionRequest request)
         {
+            
             Player player = TryGetPlayer(request.PlayerGuid);
             int workerId = request.WorkerId;
             int buildingId = request.BuildingId;
             bool success;
+            bool enoughActions = Game.GameClock.Tick();
             BuildingState buildingState = BuildingState.InProgress;
-            if (player.HasEnoughCoins(workerId))
+            if (player.HasEnoughCoins(workerId) && enoughActions)
             {
                 buildingState = player.AssignWorkerToBuilding(workerId, buildingId);
                 success = true;
+                enoughActions = true;
+            }
+            else if(player.HasEnoughCoins(workerId) && enoughActions == false)
+            {
+                success = true;
+                enoughActions = false;
             }
             else
             {
                 success = false;
+                enoughActions = true;
             }
-            Game.GameClock.Tick();
+            //Game.GameClock.Tick();
 
             AssignWorkerActionResponse response = new AssignWorkerActionResponse
             {
                 Success = success,
-                BuildingCompleted = buildingState == BuildingState.Completed
+                BuildingCompleted = buildingState == BuildingState.Completed,
+                EnoughActions = enoughActions
             };
 
             return response;

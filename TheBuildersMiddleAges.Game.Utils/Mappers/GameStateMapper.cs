@@ -71,13 +71,14 @@ namespace TheBuildersMiddleAges.Game.Utils.Mappers
                 playersDtos.Add(playerDto);
             }
             var gameState = Enum.GetName(typeof(GameState), game.State);
-
+            
             GameDto gameDto = new GameDto
             {
                 Players = playersDtos,
                 GameBoard = gameBoardDto,
                 State = gameState,
-                ActingPlayer = game.GameClock.ActingPlayerGuid
+                ActingPlayer = game.GameClock.ActingPlayerGuid,
+                RemainingActions = game.GameClock._remainingActions
             };
 
             return gameDto;

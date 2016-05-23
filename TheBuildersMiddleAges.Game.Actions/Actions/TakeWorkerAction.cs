@@ -11,22 +11,44 @@ namespace TheBuildersMiddleAges.Game.Actions.Actions
 
         public override TakeCardActionResponse Do(ActionRequest request)
         {
-            Player player = TryGetPlayer(request.PlayerGuid);
-            Worker worker = Game.TakeWorker(request.WorkerId);
-
-            player.HireWorker(worker);
-            Game.GameClock.Tick();
-            int newCard = Game.DrawWorker();
-            int topCard = Game.GameBoard.TopWorker.Id;
-
-            TakeCardActionResponse response = new TakeCardActionResponse
+            if (Game.GameClock.Tick())
             {
-                Success = true,
-                NewCard = newCard,
-                TopCard = topCard
-            };
+                Player player = TryGetPlayer(request.PlayerGuid);
+                Worker worker = Game.TakeWorker(request.WorkerId);
 
-            return response;
+                player.HireWorker(worker);
+                //Game.GameClock.Tick();
+                int newCard = Game.DrawWorker();
+                int topCard = Game.GameBoard.TopWorker.Id;
+
+                TakeCardActionResponse response = new TakeCardActionResponse
+                {
+                    Success = true,
+                    NewCard = newCard,
+                    TopCard = topCard
+                };
+
+                return response;
+            }
+            else
+            {
+                Player player = TryGetPlayer(request.PlayerGuid);
+                //Worker worker = Game.TakeWorker(request.WorkerId);
+
+                //player.HireWorker(worker);
+                //Game.GameClock.Tick();
+                int newCard = Game.GameBoard.TopWorker.Id;
+                int topCard = Game.GameBoard.TopWorker.Id;
+
+                TakeCardActionResponse response = new TakeCardActionResponse
+                {
+                    Success = false,
+                    NewCard = newCard,
+                    TopCard = topCard
+                };
+
+                return response;
+            }
         }
     }
 }
