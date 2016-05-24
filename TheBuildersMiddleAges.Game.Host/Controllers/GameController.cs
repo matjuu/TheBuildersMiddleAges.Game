@@ -98,7 +98,7 @@ namespace TheBuildersMiddleAges.Game.Host.Controllers
         [HttpPost]
         [GameFilter]
         [Route("/api/game/move/sell")]
-        public ActionResponseBase SellMove([FromBody] ActionRequest request)
+        public ActionResponseBase SellMove(ActionRequest request)
         {
             var response = _handler.HandleAction<SellMoveAction, ActionResponseBase>(request, new SellMoveAction());
 
@@ -109,9 +109,31 @@ namespace TheBuildersMiddleAges.Game.Host.Controllers
         [HttpPost]
         [GameFilter]
         [Route("/api/game/move/buy")]
-        public ActionResponseBase BuyMove([FromBody] ActionRequest request)
+        public ActionResponseBase BuyMove(ActionRequest request)
         {
             var response = _handler.HandleAction<BuyMoveAction, ActionResponseBase>(request, new BuyMoveAction());
+
+            Response.Headers.Add(new KeyValuePair<string, StringValues>("Access-Control-Allow-Origin", "*"));
+            return response;
+        }
+
+        [HttpPost]
+        [GameFilter]
+        [Route("/api/game/player/endTurn")]
+        public ActionResponseBase EndTurn(ActionRequest request)
+        {
+            var response = _handler.HandleAction<EndTurnAction, ActionResponseBase>(request, new EndTurnAction());
+
+            Response.Headers.Add(new KeyValuePair<string, StringValues>("Access-Control-Allow-Origin", "*"));
+            return response;
+        }
+
+        [HttpPost]
+        [GameFilter]
+        [Route("/api/game/building/startBuilding")]
+        public ActionResponseBase StartBuilding(ActionRequest request)
+        {
+            var response = _handler.HandleAction<StartBuildingAction, ActionResponseBase>(request, new StartBuildingAction());
 
             Response.Headers.Add(new KeyValuePair<string, StringValues>("Access-Control-Allow-Origin", "*"));
             return response;

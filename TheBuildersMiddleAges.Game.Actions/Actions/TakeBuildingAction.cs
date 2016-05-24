@@ -12,22 +12,39 @@ namespace TheBuildersMiddleAges.Game.Actions.Actions
 
         public override TakeCardActionResponse Do(ActionRequest request)
         {
-            Player player = TryGetPlayer(request.PlayerGuid);
-            Building building = Game.TakeBuilding(request.BuildingId);
-
-            player.TakeBuilding(building);
-            Game.GameClock.Tick();
-            int newCard = Game.DrawBuilding();
-            int topCard = Game.GameBoard.TopBuilding.Id;
-
-            TakeCardActionResponse response = new TakeCardActionResponse
+            if (Game.GameClock.Tick())
             {
-                Success = true,
-                NewCard = newCard,
-                TopCard = topCard
-            };
+                Player player = TryGetPlayer(request.PlayerGuid);
+                Building building = Game.TakeBuilding(request.BuildingId);
 
-            return response;
+                player.TakeBuilding(building);
+                int newCard = Game.DrawBuilding();
+                int topCard = Game.GameBoard.TopBuilding.Id;
+
+                TakeCardActionResponse response = new TakeCardActionResponse
+                {
+                    Success = true,
+                    NewCard = newCard,
+                    TopCard = topCard
+                };
+
+                return response;
+            }
+            else
+            {
+                Player player = TryGetPlayer(request.PlayerGuid);
+                int newCard = Game.GameBoard.TopBuilding.Id;
+                int topCard = Game.GameBoard.TopBuilding.Id;
+
+                TakeCardActionResponse response = new TakeCardActionResponse
+                {
+                    Success = false,
+                    NewCard = newCard,
+                    TopCard = topCard
+                };
+
+                return response;
+            }
         }
     }
 }

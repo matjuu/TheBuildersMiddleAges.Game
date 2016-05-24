@@ -9,7 +9,7 @@ namespace TheBuildersMiddleAges.Game.Core
         private const int ActionCountPerMove = 3;
         private readonly List<Guid> _players;
         private int _moveNumber = 1;
-        private int _remainingActions = 3;
+        public int RemainingActions = 3;
 
         public Guid ActingPlayerGuid => _players[_moveNumber%(_players.Count)];
 
@@ -20,20 +20,26 @@ namespace TheBuildersMiddleAges.Game.Core
             _players = players;
         }
 
-        public void Tick(int actions = 1)
+        public bool Tick(int actions = 1)
         {
-            if (_remainingActions < actions)
+            if (RemainingActions < actions)
             {
-                throw new ArgumentException("You don't have enough actions");
+                return false;
             }
             
-            _remainingActions -= actions;
+            RemainingActions -= actions;
+            return true;
+        }
 
-            if (_remainingActions == 0)
-            {
-                _moveNumber++;
-                _remainingActions = 3;
-            }
+        public bool UnTick(int actions = 1)
+        {
+            RemainingActions += actions;
+            return true;
+        }
+
+        public void ResetActions()
+        {
+            RemainingActions = 3;
         }
     }
 }

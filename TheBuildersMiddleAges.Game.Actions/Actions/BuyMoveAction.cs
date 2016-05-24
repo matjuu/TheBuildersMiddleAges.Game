@@ -8,11 +8,20 @@ namespace TheBuildersMiddleAges.Game.Actions.Actions
         {
             Game = GameContainer.Instance.GetGame(request.GameGuid);
             var player = TryGetPlayer(request.PlayerGuid);
+            bool success;
+            if (player.HasEnoughCoinsForAction())
+            {
+                player.BuyMove();
+                Game.GameClock.UnTick();
+                success = true;
+            }
+            else
+            {
+                success = false;
+            }
+            
 
-            player.BuyMove();
-            Game.GameClock.Tick();
-
-            return new BasicActionResponse { Success = true };
+            return new BasicActionResponse { Success = success };
         }
     }
 }
